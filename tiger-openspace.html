@@ -117,6 +117,26 @@ hr.div { border: none; height: 1px; background: linear-gradient(to right, var(--
   .mod-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media print { .sidebar { display: none; } .main { margin-left: 0; } }
+
+/* ── LANG TOGGLE ── */
+.lang-toggle {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 16px 12px;
+}
+.lang-btn {
+  flex: 1; padding: 6px 0; border: none; border-radius: 6px;
+  font-family: 'Sarabun', sans-serif; font-size: 12px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+  background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.45);
+}
+.lang-btn.active {
+  background: var(--red); color: white;
+  box-shadow: 0 2px 8px rgba(196,18,48,0.4);
+}
+/* hero eyebrow multilang */
+.hero-eyebrow[data-th], h2[data-th], .en[data-th], 
+.nav-group-label[data-th], .nav-label-text[data-th] { transition: none; }
+
 </style>
 </head>
 <body>
@@ -128,38 +148,42 @@ hr.div { border: none; height: 1px; background: linear-gradient(to right, var(--
     </div>
     <div style="margin-top:6px; color:rgba(255,255,255,0.4); font-size:10px; letter-spacing:0.5px;">MSS Mobile Application</div>
   </div>
+
+  <!-- ── LANG TOGGLE ── -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-th" onclick="setLang('th')">🇹🇭 ไทย</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇬🇧 EN</button>
+  </div>
+
   <div class="nav-group">
-    <div class="nav-group-label">เริ่มต้น</div>
-        <a href="#login" class="nav-item"><span class="nav-num">1</span> เข้าสู่ระบบ (Login)</a>
+    <div class="nav-group-label" data-th="เริ่มต้น" data-en="Getting Started">เริ่มต้น</div>
+        <a href="#login" class="nav-item"><span class="nav-num">1</span> <span class="nav-label-text" data-th="เข้าสู่ระบบ (Login)" data-en="Login">เข้าสู่ระบบ (Login)</span></a>
   </div>
   <div class="nav-group">
-    <div class="nav-group-label">หน้าหลัก</div>
-    <a href="#home" class="nav-item"><span class="nav-num">2</span> หน้าหลัก (Home)</a>
-    <a href="#quickmenu" class="nav-item"><span class="nav-num">3</span> เมนูลัด (Quick Menu)</a>
-    <a href="#calendar" class="nav-item"><span class="nav-num">4</span> ปฏิทิน (Calendar)</a>
+    <div class="nav-group-label" data-th="หน้าหลัก" data-en="Main Screen">หน้าหลัก</div>
+    <a href="#home" class="nav-item"><span class="nav-num">2</span> <span class="nav-label-text" data-th="หน้าหลัก (Home)" data-en="Home">หน้าหลัก (Home)</span></a>
+    <a href="#quickmenu" class="nav-item"><span class="nav-num">3</span> <span class="nav-label-text" data-th="เมนูลัด (Quick Menu)" data-en="Quick Menu">เมนูลัด (Quick Menu)</span></a>
+    <a href="#calendar" class="nav-item"><span class="nav-num">4</span> <span class="nav-label-text" data-th="ปฏิทิน (Calendar)" data-en="Calendar">ปฏิทิน (Calendar)</span></a>
   </div>
   <div class="nav-group">
-    <div class="nav-group-label">คำขอ</div>
-    <a href="#checkin" class="nav-item"><span class="nav-num">5</span> เช็คอิน (Check-in)</a>
-    <a href="#leave" class="nav-item"><span class="nav-num">6</span> ขอลา (Leave)</a>
-    <a href="#ot" class="nav-item"><span class="nav-num">7</span> ขอ OT</a>
-    <a href="#recordtime" class="nav-item"><span class="nav-num">8</span> บันทึกเวลาทำงาน</a>
-    <a href="#shift" class="nav-item"><span class="nav-num">9</span> เปลี่ยน/สลับกะ</a>
-    <a href="#claim" class="nav-item"><span class="nav-num">10</span> เบิกค่าใช้จ่าย</a>
+    <div class="nav-group-label" data-th="คำขอ" data-en="Requests">คำขอ</div>
+        <a href="#leave" class="nav-item"><span class="nav-num">5</span> <span class="nav-label-text" data-th="ขอลา (Leave)" data-en="Leave Request">ขอลา (Leave)</span></a>
+    <a href="#ot" class="nav-item"><span class="nav-num">6</span> <span class="nav-label-text" data-th="ขอ OT" data-en="OT Request">ขอ OT</span></a>
+    <a href="#recordtime" class="nav-item"><span class="nav-num">7</span> <span class="nav-label-text" data-th="บันทึกเวลาทำงาน" data-en="Record Time">บันทึกเวลาทำงาน</span></a>
+          </div>
+  <div class="nav-group">
+    <div class="nav-group-label" data-th="ผู้จัดการ" data-en="Manager">ผู้จัดการ</div>
+    <a href="#approval" class="nav-item"><span class="nav-num">8</span> <span class="nav-label-text" data-th="อนุมัติ (Approval)" data-en="Approval">อนุมัติ (Approval)</span></a>
+    <a href="#teamcal" class="nav-item"><span class="nav-num">9</span> <span class="nav-label-text" data-th="ปฏิทินทีม" data-en="Team Calendar">ปฏิทินทีม</span></a>
   </div>
   <div class="nav-group">
-    <div class="nav-group-label">ผู้จัดการ</div>
-    <a href="#approval" class="nav-item"><span class="nav-num">11</span> อนุมัติ (Approval)</a>
-    <a href="#teamcal" class="nav-item"><span class="nav-num">12</span> ปฏิทินทีม</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">รายงาน</div>
-    <a href="#payslip" class="nav-item"><span class="nav-num">13</span> สลิปเงินเดือน</a>
-    <a href="#reports" class="nav-item"><span class="nav-num">14</span> รายงาน (Reports)</a>
-    <a href="#more" class="nav-item"><span class="nav-num">15</span> เพิ่มเติม (More)</a>
+    <div class="nav-group-label" data-th="รายงาน" data-en="Reports">รายงาน</div>
+    <a href="#payslip" class="nav-item"><span class="nav-num">10</span> <span class="nav-label-text" data-th="สลิปเงินเดือน" data-en="Pay Slip">สลิปเงินเดือน</span></a>
+    <a href="#reports" class="nav-item"><span class="nav-num">11</span> <span class="nav-label-text" data-th="รายงาน (Reports)" data-en="Reports">รายงาน (Reports)</span></a>
+    <a href="#more" class="nav-item"><span class="nav-num">12</span> <span class="nav-label-text" data-th="เพิ่มเติม (More)" data-en="More">เพิ่มเติม (More)</span></a>
   </div>
   <div class="sidebar-footer">
-    <div class="ver-badge"><strong>🐯 Tiger OpenSpace</strong>Version 4.0.1 · MSS Mobile App<br>TIGERSOFT (1998)</div>
+    <div class="ver-badge"><strong>🐯 Tiger OpenSpace</strong>Version 4.0.1 - MSS Mobile App<br>Akara Resources Public Company Limited</div>
   </div>
 </nav>
 
@@ -181,420 +205,345 @@ hr.div { border: none; height: 1px; background: linear-gradient(to right, var(--
 
   <div class="content">
 
-    <!-- 1: DOWNLOAD -->
-    
-
-    <!-- 2: LOGIN -->
-    <div class="section" id="login">
-      <div class="section-header">
-        <div class="step-badge">2</div>
-        <div class="sec-title"><h2>🔑 ขั้นตอนการเข้าสู่ระบบ</h2><div class="en">Login Steps</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header red">📲 ครั้งแรก: ลงทะเบียนบริษัท / First-Time Setup</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>เปิดแอป → กด "QR Code" เพื่อสแกน หรือกรอก URL บริษัท</strong><span class="en">Open App → Tap "QR Code" or Enter URL</span><p>ขอ QR Code / URL จาก HR ขององค์กร แล้วกด <strong>"Continue"</strong></p></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>กรอก Username = รหัสพนักงาน</strong><span class="en">Username = Employee ID (e.g., TG001, G001)</span></div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>กรอก Password แล้วกด "ไปต่อ"</strong><span class="en">Enter Password → Tap "Continue"</span><p>หรือใช้ <strong>บัญชี Microsoft</strong> หากองค์กรเปิดใช้งาน</p></div></li>
-          </ul>
-        </div>
-      </div>
-      <div class="info-box warn"><span class="ico">⚠️</span><div class="info-box-text"><strong>หลังเข้าระบบครั้งแรก</strong> แนะนำให้เปลี่ยนรหัสผ่านทันที → เพิ่มเติม (☰) → ตั้งค่า → เปลี่ยนรหัสผ่าน</div></div>
+<div class="section" id="login">
+  <div class="section-header">
+    <div class="step-badge">1</div>
+    <div class="sec-title">
+      <h2 class="bi" data-th="🔑 ขั้นตอนการเข้าสู่ระบบ" data-en="🔑 Login Steps">🔑 ขั้นตอนการเข้าสู่ระบบ</h2>
+      <div class="en bi" data-th="Login Steps" data-en="How to Log In">Login Steps</div>
     </div>
+  </div>
+  <div class="card">
+    <div class="card-header red"><span class="bi" data-th="📲 ครั้งแรก: ลงทะเบียนบริษัท" data-en="📲 First-Time Setup">📲 ครั้งแรก: ลงทะเบียนบริษัท</span></div>
+    <div class="card-body"><ul class="steps">
+      <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong class="bi" data-th="เปิดแอป กด QR Code เพื่อสแกน หรือกรอก URL บริษัท" data-en="Open App, tap QR Code or enter Company URL">เปิดแอป กด QR Code เพื่อสแกน หรือกรอก URL บริษัท</strong><p><span class="bi" data-th="ขอ QR Code / URL จาก HR ขององค์กร แล้วกด Continue" data-en="Get QR Code / URL from HR, then tap Continue">ขอ QR Code / URL จาก HR ขององค์กร แล้วกด Continue</span></p></div></li>
+      <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong class="bi" data-th="กรอก Username = รหัสพนักงาน" data-en="Enter Username = Employee ID">กรอก Username = รหัสพนักงาน</strong></div></li>
+      <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong class="bi" data-th="กรอก Password แล้วกด ไปต่อ" data-en="Enter Password then tap Continue">กรอก Password แล้วกด ไปต่อ</strong><p><span class="bi" data-th="หรือใช้บัญชี Microsoft หากองค์กรเปิดใช้งาน" data-en="Or sign in with Microsoft account if enabled">หรือใช้บัญชี Microsoft หากองค์กรเปิดใช้งาน</span></p></div></li>
+    </ul></div>
+  </div>
+  <div class="info-box warn"><span class="ico">⚠️</span><div class="info-box-text"><strong class="bi" data-th="หลังเข้าระบบครั้งแรก" data-en="After First Login">หลังเข้าระบบครั้งแรก</strong> <span class="bi" data-th="แนะนำให้เปลี่ยนรหัสผ่านทันที ไปที่ เพิ่มเติม ตั้งค่า เปลี่ยนรหัสผ่าน" data-en="Change your password immediately. Go to More, Settings, Change Password">แนะนำให้เปลี่ยนรหัสผ่านทันที ไปที่ เพิ่มเติม ตั้งค่า เปลี่ยนรหัสผ่าน</span></div></div>
+</div><hr class="div">
 
-    <hr class="div">
-
-    <!-- 3: HOME -->
-    <div class="section" id="home">
-      <div class="section-header">
-        <div class="step-badge">3</div>
-        <div class="sec-title"><h2>🏠 หน้าหลัก (Home)</h2><div class="en">Main Dashboard Overview</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">📋 ส่วนประกอบของหน้าหลัก / Home Screen Components</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">📢</div><div class="step-body"><strong>ข่าวประกาศจากฝ่ายบุคคล</strong><span class="en">HR Announcements</span><p>ประกาศล่าสุดจาก HR เช่น นโยบาย ข่าวสาร กิจกรรมบริษัท</p></div></li>
-            <li class="step-item"><div class="step-dot">⚡</div><div class="step-body"><strong>เมนูลัด (Quick Menu Widget)</strong><span class="en">Shortcut Icons</span><p>เช็คอิน · คำขอลา · OT · เปลี่ยนกะ · สลิปกะ · เบิกค่าใช้จ่าย · ปฏิทิน · สลิปเงินเดือน</p></div></li>
-            <li class="step-item"><div class="step-dot">📅</div><div class="step-body"><strong>วันของฉัน (My Day)</strong><span class="en">Today's Shift &amp; Attendance</span><p>กะงานวันนี้ · เวลาเข้า-ออก · สถานะการเข้างาน</p></div></li>
-            <li class="step-item"><div class="step-dot">✅</div><div class="step-body"><strong>รายการที่ต้องทำ (To-Do)</strong><span class="en">Tasks List</span><p>กด <strong>+</strong> เพิ่มรายการ · กด <strong>⋮</strong> เรียงหรือดูที่ทำเสร็จ · กด <strong>จัดการวิดเจ็ต</strong> เพื่อจัดหน้า Home</p></div></li>
-            <li class="step-item"><div class="step-dot">🏖️</div><div class="step-body"><strong>วันลาที่คงเหลือ</strong><span class="en">Leave Balance</span><p>ลาพักร้อน · ลาป่วย · ลากิจ และยอดคงเหลือ</p></div></li>
-            <li class="step-item"><div class="step-dot">👥</div><div class="step-body"><strong>ภาพรวมของทีม (Manager)</strong><span class="en">Team Overview — Manager Only</span><p>สมาชิกที่เข้างาน / ไม่มีข้อมูลเวลา</p></div></li>
-          </ul>
-        </div>
-      </div>
-      <p style="font-weight:700;color:var(--navy);margin:16px 0 8px;font-size:13.5px;">📱 แถบเมนูด้านล่าง / Bottom Navigation Bar</p>
-      <div class="bottom-nav">
-        <div class="bn-item active-bn"><span class="bn-icon">🏠</span><div class="bn-label">หน้าหลัก</div></div>
-        <div class="bn-item"><span class="bn-icon">📅</span><div class="bn-label">ปฏิทิน</div></div>
-        <div class="bn-item"><span class="bn-icon">➕</span><div class="bn-label">คำขอ</div></div>
-        <div class="bn-item"><span class="bn-icon">🔔</span><div class="bn-label">แจ้งเตือน</div></div>
-        <div class="bn-item"><span class="bn-icon">☰</span><div class="bn-label">เพิ่มเติม</div></div>
-      </div>
+<div class="section" id="home">
+  <div class="section-header">
+    <div class="step-badge">2</div>
+    <div class="sec-title">
+      <h2 class="bi" data-th="🏠 หน้าหลัก (Home)" data-en="🏠 Home Screen">🏠 หน้าหลัก (Home)</h2>
+      <div class="en bi" data-th="Main Dashboard Overview" data-en="Main Dashboard Overview">Main Dashboard Overview</div>
     </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><span class="bi" data-th="📋 ส่วนประกอบของหน้าหลัก" data-en="📋 Home Screen Components">📋 ส่วนประกอบของหน้าหลัก</span></div>
+    <div class="card-body"><ul class="steps">
+      <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong class="bi" data-th="📢 ข่าวประกาศจากฝ่ายบุคคล" data-en="📢 HR Announcements">📢 ข่าวประกาศจากฝ่ายบุคคล</strong><p><span class="bi" data-th="ประกาศล่าสุดจาก HR เช่น นโยบาย ข่าวสาร กิจกรรมบริษัท" data-en="Latest HR announcements: policies, news, company events">ประกาศล่าสุดจาก HR เช่น นโยบาย ข่าวสาร กิจกรรมบริษัท</span></p></div></li>
+      <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong class="bi" data-th="⚡ เมนูลัด (Quick Menu Widget)" data-en="⚡ Quick Menu Widget">⚡ เมนูลัด (Quick Menu Widget)</strong><p><span class="bi" data-th="เช็คอิน ลา OT เปลี่ยนกะ เบิกค่าใช้จ่าย ปฏิทิน สลิปเงินเดือน" data-en="Check-in, Leave, OT, Shift, Expense Claim, Calendar, Pay Slip">เช็คอิน ลา OT เปลี่ยนกะ เบิกค่าใช้จ่าย ปฏิทิน สลิปเงินเดือน</span></p></div></li>
+      <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong class="bi" data-th="📅 วันของฉัน (My Day)" data-en="📅 My Day">📅 วันของฉัน (My Day)</strong><p><span class="bi" data-th="กะงานวันนี้ เวลาเข้า-ออก สถานะการเข้างาน" data-en="Today shift, clock in/out times, attendance status">กะงานวันนี้ เวลาเข้า-ออก สถานะการเข้างาน</span></p></div></li>
+      <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong class="bi" data-th="✅ รายการที่ต้องทำ" data-en="✅ To-Do List">✅ รายการที่ต้องทำ</strong><p><span class="bi" data-th="กด + เพิ่มรายการ กด จัดการวิดเจ็ต เพื่อจัดหน้า Home" data-en="Tap + to add items, tap Manage Widgets to arrange Home screen">กด + เพิ่มรายการ กด จัดการวิดเจ็ต เพื่อจัดหน้า Home</span></p></div></li>
+      <li class="step-item"><div class="step-dot">5</div><div class="step-body"><strong class="bi" data-th="🏖️ วันลาที่คงเหลือ" data-en="🏖️ Leave Balance">🏖️ วันลาที่คงเหลือ</strong><p><span class="bi" data-th="ลาพักร้อน ลาป่วย ลากิจ และยอดคงเหลือ" data-en="Annual leave, sick leave, personal leave and remaining balance">ลาพักร้อน ลาป่วย ลากิจ และยอดคงเหลือ</span></p></div></li>
+      <li class="step-item"><div class="step-dot">6</div><div class="step-body"><strong class="bi" data-th="👥 ภาพรวมของทีม (สำหรับผู้จัดการ)" data-en="👥 Team Overview (Manager)">👥 ภาพรวมของทีม (สำหรับผู้จัดการ)</strong><p><span class="bi" data-th="สมาชิกที่เข้างาน และไม่มีข้อมูลเวลา" data-en="Team members present and those with missing time data">สมาชิกที่เข้างาน และไม่มีข้อมูลเวลา</span></p></div></li>
+    </ul></div>
+  </div>
+  <p style="font-weight:700;color:var(--navy);margin:16px 0 8px;font-size:13.5px;"
+     class="bi" data-th="📱 แถบเมนูด้านล่าง" data-en="📱 Bottom Navigation Bar">📱 แถบเมนูด้านล่าง</p>
+  <div class="bottom-nav">
+    <div class="bn-item active-bn"><span class="bn-icon">🏠</span><div class="bn-label bi" data-th="หน้าหลัก" data-en="Home">หน้าหลัก</div></div>
+    <div class="bn-item"><span class="bn-icon">📅</span><div class="bn-label bi" data-th="ปฏิทิน" data-en="Calendar">ปฏิทิน</div></div>
+    <div class="bn-item"><span class="bn-icon">➕</span><div class="bn-label bi" data-th="คำขอ" data-en="Request">คำขอ</div></div>
+    <div class="bn-item"><span class="bn-icon">🔔</span><div class="bn-label bi" data-th="แจ้งเตือน" data-en="Alerts">แจ้งเตือน</div></div>
+    <div class="bn-item"><span class="bn-icon">☰</span><div class="bn-label bi" data-th="เพิ่มเติม" data-en="More">เพิ่มเติม</div></div>
+  </div>
+</div><hr class="div">
 
-    <hr class="div">
-
-    <!-- 4: QUICK MENU -->
-    <div class="section" id="quickmenu">
-      <div class="section-header">
-        <div class="step-badge">4</div>
-        <div class="sec-title"><h2>⚡ เมนูลัด (Quick Menu)</h2><div class="en">Customize Widget Shortcuts</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">🔧 วิธีปรับแต่งเมนูลัด / How to Customize</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>กดไอคอน ✏️ ที่มุมของ Widget เมนูลัด</strong></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>กด ⊖ เพื่อนำออก · กด ⊕ เพื่อเพิ่ม Widget</strong><p>Widget ที่เพิ่มได้: ปฏิทินของฉัน · ประวัติพนักงาน · ทีมของฉัน · เอกสารของฉัน · เข้คอิน (พิกัด+รูปภาพ) · สงเวลาบันทึกงาน</p></div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>ลาก ⠿ เพื่อจัดเรียง แล้วกด "เสร็จสิ้น"</strong></div></li>
-          </ul>
-        </div>
-      </div>
+<div class="section" id="quickmenu">
+  <div class="section-header">
+    <div class="step-badge">3</div>
+    <div class="sec-title">
+      <h2 class="bi" data-th="⚡ เมนูลัด (Quick Menu)" data-en="⚡ Quick Menu">⚡ เมนูลัด (Quick Menu)</h2>
+      <div class="en bi" data-th="Customize Widget Shortcuts" data-en="Customize Widget Shortcuts">Customize Widget Shortcuts</div>
     </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><span class="bi" data-th="🔧 วิธีปรับแต่งเมนูลัด" data-en="🔧 How to Customize Quick Menu">🔧 วิธีปรับแต่งเมนูลัด</span></div>
+    <div class="card-body"><ul class="steps">
+      <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong class="bi" data-th="กดไอคอน ✏️ ที่มุมของ Widget เมนูลัด" data-en="Tap the ✏️ icon at the Quick Menu widget corner">กดไอคอน ✏️ ที่มุมของ Widget เมนูลัด</strong></div></li>
+      <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong class="bi" data-th="กด ⊖ เพื่อนำออก กด ⊕ เพื่อเพิ่ม Widget" data-en="Tap ⊖ to remove, tap ⊕ to add a widget">กด ⊖ เพื่อนำออก กด ⊕ เพื่อเพิ่ม Widget</strong><p><span class="bi" data-th="Widget ที่เพิ่มได้: ปฏิทินของฉัน ประวัติพนักงาน ทีมของฉัน เอกสารของฉัน" data-en="Available: My Calendar, Employee Profile, My Team, My Documents">Widget ที่เพิ่มได้: ปฏิทินของฉัน ประวัติพนักงาน ทีมของฉัน เอกสารของฉัน</span></p></div></li>
+      <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong class="bi" data-th="ลาก ⠿ เพื่อจัดเรียง แล้วกด เสร็จสิ้น" data-en="Drag ⠿ to reorder, then tap Done">ลาก ⠿ เพื่อจัดเรียง แล้วกด เสร็จสิ้น</strong></div></li>
+    </ul></div>
+  </div>
+</div><hr class="div">
 
-    <hr class="div">
-
-    <!-- 5: CALENDAR -->
-    <div class="section" id="calendar">
-      <div class="section-header">
-        <div class="step-badge">5</div>
-        <div class="sec-title"><h2>📅 ปฏิทิน (Calendar)</h2><div class="en">Personal &amp; Team Calendar</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">📆 การใช้งานปฏิทิน</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>แตะ 📅 ที่แถบล่าง เพื่อเปิดหน้าปฏิทิน</strong><p>แสดงกะงาน เวลาเข้า-ออก และสิ่งที่ต้องทำในแต่ละวัน</p></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>กด ⠿ เพื่อเลือกมุมมองเพิ่มเติม</strong><p>กล่องข้อความแจ้งเดือน · คำขอของฉัน · ประวัติเช็คอิน</p></div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>สลับแท็บ "ปฏิทินการทำงานทีม"</strong><p>ดูสถานะทีม · กด ⊕ เพื่อส่งคำขอแทนพนักงาน (ลา / OT / บันทึกเวลา / เปลี่ยนกะ)</p></div></li>
-          </ul>
-        </div>
-      </div>
+<div class="section" id="calendar">
+  <div class="section-header">
+    <div class="step-badge">4</div>
+    <div class="sec-title">
+      <h2 class="bi" data-th="📅 ปฏิทิน (Calendar)" data-en="📅 Calendar">📅 ปฏิทิน (Calendar)</h2>
+      <div class="en bi" data-th="Personal and Team Calendar" data-en="Personal and Team Calendar">Personal and Team Calendar</div>
     </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><span class="bi" data-th="📆 การใช้งานปฏิทิน" data-en="📆 Calendar Usage">📆 การใช้งานปฏิทิน</span></div>
+    <div class="card-body"><ul class="steps">
+      <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong class="bi" data-th="แตะ 📅 ที่แถบล่าง เพื่อเปิดหน้าปฏิทิน" data-en="Tap 📅 in the bottom bar to open the Calendar">แตะ 📅 ที่แถบล่าง เพื่อเปิดหน้าปฏิทิน</strong><p><span class="bi" data-th="แสดงกะงาน เวลาเข้า-ออก และสิ่งที่ต้องทำในแต่ละวัน" data-en="Shows shift, clock in/out times, and daily tasks">แสดงกะงาน เวลาเข้า-ออก และสิ่งที่ต้องทำในแต่ละวัน</span></p></div></li>
+      <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong class="bi" data-th="กด ⠿ เพื่อเลือกมุมมองเพิ่มเติม" data-en="Tap ⠿ to select additional views">กด ⠿ เพื่อเลือกมุมมองเพิ่มเติม</strong><p><span class="bi" data-th="กล่องข้อความแจ้งเตือน คำขอของฉัน ประวัติเช็คอิน" data-en="Notification inbox, My Requests, Check-in History">กล่องข้อความแจ้งเตือน คำขอของฉัน ประวัติเช็คอิน</span></p></div></li>
+      <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong class="bi" data-th="สลับแท็บ ปฏิทินการทำงานทีม" data-en="Switch to Team Calendar tab">สลับแท็บ ปฏิทินการทำงานทีม</strong><p><span class="bi" data-th="ดูสถานะทีม กด ⊕ เพื่อส่งคำขอแทนพนักงาน ลา OT บันทึกเวลา เปลี่ยนกะ" data-en="View team status, tap ⊕ to submit requests on behalf: Leave, OT, Record Time, Shift Change">ดูสถานะทีม กด ⊕ เพื่อส่งคำขอแทนพนักงาน ลา OT บันทึกเวลา เปลี่ยนกะ</span></p></div></li>
+    </ul></div>
+  </div>
+</div><hr class="div">
 
-    <hr class="div">
-
-    <!-- 6: CHECK-IN -->
-    <div class="section" id="checkin">
-      <div class="section-header">
-        <div class="step-badge">6</div>
-        <div class="sec-title"><h2>📍 วิธีการเช็คอิน (Check-in)</h2><div class="en">GPS Location Check-in</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">📍 เช็คอิน (พิกัด) / Check-in with Coordinates</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>กดปุ่มเช็คอิน (พิกัด) จาก Quick Menu</strong><p>Toggle "แสดงประวัติการเช็คอิน" เพื่อดูประวัติ</p></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>ระบบแสดงพิกัด GPS ปัจจุบันบน Google Map</strong><p>กด 🎯 เพื่อให้ Google Maps ระบุตำแหน่งได้แม่นยำขึ้น</p></div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>เลือกสถานะ: "ลงเวลาเข้า" หรือ "ลงเวลาออก"</strong></div></li>
-            <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong>กด "ยืนยัน" เพื่อบันทึก</strong></div></li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">📸 เช็คอิน (พิกัด + รูปภาพ) / Check-in with Photo</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>กด "ถ่ายรูป" — จำเป็นต้องถ่ายรูปเพื่อยืนยัน</strong></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>ถ่ายรูปแล้วกด "ยืนยัน" (หรือ "ถ่ายใหม่" หากต้องการ)</strong></div></li>
-          </ul>
-        </div>
-      </div>
-      <div class="info-box tip"><span class="ico">💡</span><div class="info-box-text"><strong>ตรวจสอบประวัติเช็คอิน</strong> Toggle "แสดงประวัติการเช็คอิน" ที่หน้าเช็คอิน เพื่อดู วันที่ · เวลา · ตำแหน่ง · รหัสบัตรรูด · สถานะ</div></div>
+<div class="section" id="leave">
+  <div class="section-header">
+    <div class="step-badge">5</div>
+    <div class="sec-title">
+      <h2 class="bi" data-th="🏖️ การขอลา (Leave Request)" data-en="🏖️ Leave Request">🏖️ การขอลา (Leave Request)</h2>
+      <div class="en bi" data-th="Leave Request Procedure" data-en="Leave Request Procedure">Leave Request Procedure</div>
     </div>
-
-    <hr class="div">
-
-    <!-- 7: LEAVE -->
-    <div class="section" id="leave">
-      <div class="section-header">
-        <div class="step-badge">7</div>
-        <div class="sec-title"><h2>🏖️ การขอลา (Leave Request)</h2><div class="en">Leave Request Procedure</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">📝 ขั้นตอนการยื่นคำขอลา / Leave Request Steps</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>เลือกประเภทการลา</strong><span class="en">Select Leave Type</span><p>ลาพักร้อน · ลาป่วย · ลากิจ · ลาวันหยุดประจำปี · ลาคลอดรับค่าจ้าง · ลาบวช · ลาฝึกอบรม · ลาภาคปฏิบัติ ฯลฯ</p></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกรูปแบบการขอลา</strong><span class="en">Select Leave Format</span><p>ระบบแสดง สิทธิ์การลา · ใช้ไป · คงเหลือ ก่อนยื่น</p></div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>เลือกระยะวันที่ต้องการลา</strong><span class="en">Select Date Range</span></div></li>
-            <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong>ระบุเหตุผล (ถ้ามี)</strong><span class="en">Enter Reason if Required</span></div></li>
-            <li class="step-item"><div class="step-dot">5</div><div class="step-body"><strong>แนบไฟล์หลักฐาน (ถ้ามี)</strong><span class="en">Attach Documents</span><p>เช่น ใบรับรองแพทย์ · รองรับ bmp, jpg, jpeg, pdf, doc, docx, xls, xlsx, png, txt · สูงสุด 10MB</p></div></li>
-            <li class="step-item"><div class="step-dot">6</div><div class="step-body"><strong>ใส่หมายเหตุ (ถ้ามี) แล้วกด "ยืนยัน"</strong></div></li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">📖 รูปแบบการลา / Leave Format Types</div>
-        <div class="card-body">
-          <table class="data-table">
-            <thead><tr><th>รูปแบบ</th><th>วิธีการ</th><th>ตัวอย่าง</th></tr></thead>
-            <tbody>
-              <tr><td><strong>✅ ลาเต็มวัน</strong></td><td>ระบุวันเริ่มต้น → วันสิ้นสุด</td><td>01/01/68 ถึง 03/01/68 (ระบบตัดวันหยุดอัตโนมัติ)</td></tr>
-              <tr><td><strong>⏰ ลาช่วงเวลา</strong></td><td>ระบุวันที่ + ช่วงเวลา</td><td>ลา 09:00 – 12:00 น.</td></tr>
-              <tr><td><strong>🌅 ลาครึ่งวัน</strong></td><td>เลือก เช้า หรือ บ่าย</td><td>ครึ่งวันแรก (เช้า) / ครึ่งวันหลัง (บ่าย)</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="info-box red"><span class="ico">📌</span><div class="info-box-text"><strong>กรณีลงข้อมูลผิด:</strong> สถานะ "รออนุมัติ" → สามารถลบและบันทึกใหม่ได้ · สถานะ "อนุมัติ" → ต้องแจ้ง Admin (HR) เท่านั้น</div></div>
-      <div class="info-box warn"><span class="ico">⚠️</span><div class="info-box-text">หากลาแบบเว้นวัน (เฉพาะวันจันทร์-พุธ-ศุกร์) ต้องยื่นคำขอลาแยกทีละใบ</div></div>
-    </div>
-
-    <hr class="div">
-
-    <!-- 8: OT -->
-    <div class="section" id="ot">
-      <div class="section-header">
-        <div class="step-badge">8</div>
-        <div class="sec-title"><h2>⏱️ การขอทำงานล่วงเวลา (OT)</h2><div class="en">Overtime Request</div></div>
-      </div>
-      <div class="ot-grid">
-        <div class="ot-card"><div class="ot-code">(S)</div><div class="ot-name">ขอ OT ก่อนเริ่มงาน</div><div class="ot-desc">OT Before Work / วันหยุด</div></div>
-        <div class="ot-card"><div class="ot-code">(E)</div><div class="ot-name">ขอ OT หลังเลิกงาน</div><div class="ot-desc">OT After Work</div></div>
-        <div class="ot-card"><div class="ot-code">(B)</div><div class="ot-name">ขอ OT พักเที่ยง</div><div class="ot-desc">OT Lunchtime</div></div>
-      </div>
-      <div class="card" style="margin-top:13px;">
-        <div class="card-header">📝 ขั้นตอนการขอ OT (S และ E)</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>ระบุวันที่ขอ OT</strong> (วันเริ่มต้น – วันสิ้นสุด)</div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกประเภท OT</strong> (S) / (E) / (B)</div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>ระบุชื่องาน/หัวข้อในการทำ OT</strong></div></li>
-            <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong>ระบุช่วงเวลา OT</strong> (จาก – ถึง) ระบบคำนวณระยะเวลาให้</div></li>
-            <li class="step-item"><div class="step-dot">5</div><div class="step-body"><strong>กด "ยืนยัน"</strong></div></li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">🌟 OT พิเศษ / Special OT</div>
-        <div class="card-body">
-          <p style="color:var(--slate);font-size:13px;margin-bottom:10px;">ใช้เมื่อพนักงานได้รับ OT พิเศษ ทำหลายช่วงเวลา / ควบกะงาน / ได้เงินพิเศษ</p>
-          <table class="data-table">
-            <thead><tr><th>ช่อง</th><th>รายละเอียด</th></tr></thead>
-            <tbody>
-              <tr><td>โอที1 – โอที6</td><td>ระบุจำนวนชั่วโมงในแต่ละอัตรา OT</td></tr>
-              <tr><td>ค่ากะโอที</td><td>จำนวนเงิน (บาท)</td></tr>
-              <tr><td>ค่าอาหารโอที</td><td>จำนวนเงิน (บาท)</td></tr>
-              <tr><td>เงินพิเศษ</td><td>เงินพิเศษอื่นๆ (ถ้ามี)</td></tr>
-            </tbody>
-          </table>
-          <div class="info-box red" style="margin-top:10px;"><span class="ico">📌</span><div class="info-box-text">OT พิเศษ สามารถขอได้เฉพาะ OT จ่ายเงินเท่านั้น</div></div>
-        </div>
-      </div>
-      <div class="info-box tip"><span class="ico">💡</span><div class="info-box-text"><strong>ยกเลิก OT</strong> → หน้าการแจ้งเตือน → คำขอของฉัน → เลือกคำขอ OT → กด "ยกเลิกคำขอ"</div></div>
-    </div>
-
-    <hr class="div">
-
-    <!-- 9: RECORD TIME -->
-    <div class="section" id="recordtime">
-      <div class="section-header">
-        <div class="step-badge">9</div>
-        <div class="sec-title"><h2>⏰ บันทึกเวลาทำงาน (Record Time)</h2><div class="en">Manual Time Recording</div></div>
-      </div>
-      <div class="info-box warn"><span class="ico">⚠️</span><div class="info-box-text"><strong>ใช้เมื่อ</strong> ลืมสแกนนิ้ว หรือลืมเช็คอิน — ต้องผ่านการอนุมัติจากหัวหน้าหรือฝ่ายบุคคลเท่านั้น</div></div>
-      <div class="card">
-        <div class="card-header">📋 บันทึก 1 ช่วง (เข้า หรือ ออก) / In or Out Only</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>ระบุวันที่ขอลงเวลา</strong></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>ระบุเวลาที่ต้องการลง</strong></div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>เลือกสถานะ: "ลงเวลาเข้า" หรือ "ลงเวลาออก"</strong></div></li>
-            <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong>กด "ยืนยัน"</strong></div></li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">📋 บันทึกทั้ง 2 ช่วง (เข้า + ออก) / In and Out</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>ระบุวันที่เริ่มต้น + เวลาเข้างาน</strong></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>ระบุวันที่สิ้นสุด + เวลาออกงาน</strong></div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>สถานะ "ลงเวลาออก" แล้วกด "ยืนยัน"</strong></div></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <hr class="div">
-
-    <!-- 10: SHIFT -->
-    <div class="section" id="shift">
-      <div class="section-header">
-        <div class="step-badge">10</div>
-        <div class="sec-title"><h2>🔄 เปลี่ยน/สลับกะงาน</h2><div class="en">Shift Exchange &amp; Shift Swap</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">🔁 การเปลี่ยนกะงาน (Shift Exchange)</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>เลือกวันที่ต้องการเปลี่ยนกะ</strong><p>กรอบสีเทาแสดงกะปัจจุบัน · Day Off = เปลี่ยนเป็นวันหยุด</p></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกกะงานใหม่ที่ต้องการ</strong> เช่น BS1, BS2, BS3</div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>กด "ยืนยัน"</strong></div></li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">🔃 การสลับกะงาน (Shift Swap)</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>ระบุวันที่จะสลับกะกับเพื่อนร่วมทีม</strong></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกเพื่อนร่วมงานที่ต้องการสลับ</strong></div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>กด "ยืนยัน"</strong></div></li>
-          </ul>
-          <div class="info-box red"><span class="ico">📌</span><div class="info-box-text">การสลับกะงานต้องไม่ซ้ำกับเพื่อนที่จะขอสลับ และต้องได้รับการอนุมัติจากหัวหน้า</div></div>
-        </div>
-      </div>
-    </div>
-
-    <hr class="div">
-
-    <!-- 11: CLAIM -->
-    <div class="section" id="claim">
-      <div class="section-header">
-        <div class="step-badge">11</div>
-        <div class="sec-title"><h2>💳 คำขอเบิกค่าใช้จ่าย (Claim)</h2><div class="en">Expense &amp; Welfare Claim</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">🏥 หัวข้อสวัสดิการ / Welfare Claim</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>Toggle เพื่อดูประวัติคำขอ (ถ้าต้องการ)</strong></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกประเภทการเบิก → "สวัสดิการ"</strong><p>ระบบแสดงวงเงิน · ใช้ไป · คงเหลือ ของแต่ละสวัสดิการ</p></div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>เลือกประเภทสวัสดิการ</strong> เช่น สวัสดิการรักษาพยาบาล (วงเงิน 8,000 บาท/ปี)</div></li>
-            <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong>ระบุวันที่มีผล + จำนวนเงินที่ขอเบิก</strong></div></li>
-            <li class="step-item"><div class="step-dot">5</div><div class="step-body"><strong>กด "แนบไฟล์"</strong> แนบใบเสร็จ/เอกสารหลักฐาน</div></li>
-            <li class="step-item"><div class="step-dot">6</div><div class="step-body"><strong>เพิ่มรายละเอียด แล้วกด "ยืนยัน"</strong></div></li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">🚗 หัวข้อค่าใช้จ่าย / Expense Claim</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>เลือกประเภทค่าใช้จ่าย</strong> เช่น เดินทางต่างจังหวัด</div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>ระบุวันที่มีผล + จำนวนเงิน</strong></div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>แนบไฟล์ แล้วกด "ยืนยัน"</strong></div></li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">📅 วันหยุดชดเชย / Compensatory Day Off</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>ระบุวันที่ต้องการใช้วันหยุดชดเชย</strong></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกวันหยุดนักขัตฤกษ์ที่ต้องการแลก</strong> เช่น 12/08/2025</div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>กด "ยืนยัน"</strong></div></li>
-          </ul>
-          <div class="info-box warn"><span class="ico">⚠️</span><div class="info-box-text">ต้องใช้ภายใน 60 วันนับจากวันหยุดที่เกิดขึ้น · วันหยุดที่ใช้แล้วจะไม่สามารถใช้ซ้ำได้</div></div>
-        </div>
-      </div>
-    </div>
-
-    <hr class="div">
-
-    <!-- 12: APPROVAL -->
-    <div class="section" id="approval">
-      <div class="section-header">
-        <div class="step-badge">12</div>
-        <div class="sec-title"><h2>✅ การอนุมัติ (Approval)</h2><div class="en">For Managers &amp; Supervisors</div></div>
-      </div>
-      <div class="info-box tip"><span class="ico">👔</span><div class="info-box-text"><strong>สำหรับผู้จัดการ/หัวหน้างาน</strong> ฟีเจอร์นี้แสดงเฉพาะผู้มีสิทธิ์อนุมัติเท่านั้น</div></div>
-      <div class="card">
-        <div class="card-header">📋 ขั้นตอนการอนุมัติ / Approval Steps</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>กด 🔔 → เลือกแท็บ "คำขอของฉัน"</strong><p>ดูรายการทั้งหมดที่รอการอนุมัติ จัดกลุ่มตามประเภท</p></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>กรองข้อมูล (ถ้าต้องการ)</strong><p>กด 🔍 กรองตามรหัสพนักงาน · ฝ่าย · แผนก · หรือ Toggle "แสดงรายการที่รออนุมัติ"</p></div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>เลือกทีละรายการ หรือติ๊ก ☐ หลายรายการพร้อมกัน</strong><p>กด "เลือกทั้งหมด" เพื่อเลือกทุกรายการ</p></div></li>
-            <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong>กด ✅ อนุมัติ หรือ ❌ ปฏิเสธ</strong><p><span style="color:#166534;font-weight:700;">แถบขาว</span> = เปิดอ่านแล้ว · <span style="color:var(--red);font-weight:700;">แถบแดง</span> = ยังไม่เคยเปิดอ่าน</p></div></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <hr class="div">
-
-    <!-- 13: TEAM CALENDAR -->
-    <div class="section" id="teamcal">
-      <div class="section-header">
-        <div class="step-badge">13</div>
-        <div class="sec-title"><h2>👥 ปฏิทินการทำงานทีม</h2><div class="en">Team Calendar</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">📆 ส่งคำขอแทนพนักงาน / Submit Request on Behalf</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>📅 แถบล่าง → สลับแท็บ "ปฏิทินการทำงานทีม"</strong></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>กด ⊕ ที่ชื่อพนักงาน เพื่อส่งคำขอแทน</strong><p>ประเภทที่ทำแทนได้: ลา · OT · บันทึกเวลา · เปลี่ยนกะงาน · สลับกะงาน</p></div></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <hr class="div">
-
-    <!-- 14: PAYSLIP -->
-    <div class="section" id="payslip">
-      <div class="section-header">
-        <div class="step-badge">14</div>
-        <div class="sec-title"><h2>💰 สลิปเงินเดือน (PaySlip)</h2><div class="en">View &amp; Download Payslip</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">📄 วิธีดูและดาวน์โหลดสลิป</div>
-        <div class="card-body">
-          <ul class="steps">
-            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>เพิ่มเติม (☰) → ประวัติพนักงาน → ระบบเงินเดือน</strong></div></li>
-            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกสลิปที่ต้องการ</strong> → ระบุ ปี · เดือน · งวด<p>เช่น ปี 2568 · สิงหาคม · งวด 01</p></div></li>
-            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>กด Download เพื่อบันทึก PDF ลงเครื่อง</strong><p>ชื่อไฟล์: payslip_2568_08_01.pdf</p></div></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <hr class="div">
-
-    <!-- 15: REPORTS -->
-    <div class="section" id="reports">
-      <div class="section-header">
-        <div class="step-badge">15</div>
-        <div class="sec-title"><h2>📊 รายงาน (Reports)</h2><div class="en">Available Reports — เพิ่มเติม → รายงาน</div></div>
-      </div>
-      <div class="mod-grid">
-        <div class="mod-card"><span class="mod-icon">⏰</span><div class="mod-name">ข้อมูลดิบลงเวลา</div><div class="mod-en">Worktime Raw Data</div></div>
-        <div class="mod-card"><span class="mod-icon">📋</span><div class="mod-name">ข้อมูลหลังประมวลผล</div><div class="mod-en">After Processing</div></div>
-        <div class="mod-card"><span class="mod-icon">🏖️</span><div class="mod-name">ตรวจสิทธิ์ลา</div><div class="mod-en">Statutory Leave</div></div>
-        <div class="mod-card"><span class="mod-icon">📅</span><div class="mod-name">ประวัติการลา</div><div class="mod-en">Check Leave</div></div>
-        <div class="mod-card"><span class="mod-icon">⏱️</span><div class="mod-name">ประวัติขอ OT</div><div class="mod-en">History OT</div></div>
-        <div class="mod-card"><span class="mod-icon">💰</span><div class="mod-name">ส่งระบบเงินเดือน</div><div class="mod-en">Payroll System</div></div>
-        <div class="mod-card"><span class="mod-icon">🎌</span><div class="mod-name">วันหยุดประจำปี</div><div class="mod-en">Holiday Report</div></div>
-        <div class="mod-card"><span class="mod-icon">📍</span><div class="mod-name">ประวัติเช็คอิน</div><div class="mod-en">Check-In Report</div></div>
-      </div>
-      <div class="info-box red" style="margin-top:14px;"><span class="ico">📌</span><div class="info-box-text"><strong>หมายเหตุ:</strong> ข้อมูลดิบลงเวลา = ย้อนหลัง 45 วัน · ข้อมูลหลังประมวลผล = ย้อนหลังได้ 1 ปี · OT จะปรากฏหลัง HR ประมวลผลเท่านั้น</div></div>
-      <div class="info-box tip"><span class="ico">👔</span><div class="info-box-text"><strong>Supervisor</strong> กด 🔍 กรองตาม รหัสพนักงาน · ฝ่าย · แผนก เพื่อดูข้อมูลทีม</div></div>
-    </div>
-
-    <hr class="div">
-
-    <!-- 16: MORE -->
-    <div class="section" id="more">
-      <div class="section-header">
-        <div class="step-badge">16</div>
-        <div class="sec-title"><h2>☰ เพิ่มเติม (More)</h2><div class="en">Settings, Profile &amp; More</div></div>
-      </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><span class="bi" data-th="📝 ขั้นตอนการยื่นคำขอลา" data-en="📝 Leave Request Steps">📝 ขั้นตอนการยื่นคำขอลา</span></div>
+    <div class="card-body"><ul class="steps">
+      <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong class="bi" data-th="เลือกประเภทการลา" data-en="Select Leave Type">เลือกประเภทการลา</strong><p><span class="bi" data-th="ลาพักร้อน ลาป่วย ลากิจ ลาวันหยุดประจำปี ลาคลอด ฯลฯ" data-en="Annual, Sick, Personal, Holiday, Maternity leave, etc.">ลาพักร้อน ลาป่วย ลากิจ ลาวันหยุดประจำปี ลาคลอด ฯลฯ</span></p></div></li>
+      <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong class="bi" data-th="เลือกรูปแบบการขอลา" data-en="Select Leave Format">เลือกรูปแบบการขอลา</strong><p><span class="bi" data-th="ระบบแสดง สิทธิ์การลา ใช้ไป คงเหลือ ก่อนยื่น" data-en="System shows entitlement, used days, and remaining balance">ระบบแสดง สิทธิ์การลา ใช้ไป คงเหลือ ก่อนยื่น</span></p></div></li>
+      <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong class="bi" data-th="เลือกระยะวันที่ต้องการลา" data-en="Select Date Range">เลือกระยะวันที่ต้องการลา</strong></div></li>
+      <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong class="bi" data-th="ระบุเหตุผล ถ้ามี" data-en="Enter Reason if required">ระบุเหตุผล ถ้ามี</strong></div></li>
+      <li class="step-item"><div class="step-dot">5</div><div class="step-body"><strong class="bi" data-th="แนบไฟล์หลักฐาน ถ้ามี" data-en="Attach Supporting Documents if any">แนบไฟล์หลักฐาน ถ้ามี</strong><p><span class="bi" data-th="เช่น ใบรับรองแพทย์ รองรับ bmp jpg pdf doc docx xls xlsx png txt สูงสุด 10MB" data-en="e.g. Medical certificate. Supports bmp jpg pdf doc docx xls xlsx png txt. Max 10MB">เช่น ใบรับรองแพทย์ รองรับ bmp jpg pdf doc docx xls xlsx png txt สูงสุด 10MB</span></p></div></li>
+      <li class="step-item"><div class="step-dot">6</div><div class="step-body"><strong class="bi" data-th="ใส่หมายเหตุ แล้วกด ยืนยัน" data-en="Add notes then tap Confirm">ใส่หมายเหตุ แล้วกด ยืนยัน</strong></div></li>
+    </ul></div>
+  </div>
+  <div class="card">
+    <div class="card-header"><span class="bi" data-th="📖 รูปแบบการลา" data-en="📖 Leave Format Types">📖 รูปแบบการลา</span></div>
+    <div class="card-body">
       <table class="data-table">
-        <thead><tr><th>เมนู</th><th>รายละเอียด</th></tr></thead>
+        <thead><tr>
+          <th class="bi" data-th="รูปแบบ" data-en="Format">รูปแบบ</th>
+          <th class="bi" data-th="วิธีการ" data-en="Method">วิธีการ</th>
+          <th class="bi" data-th="ตัวอย่าง" data-en="Example">ตัวอย่าง</th>
+        </tr></thead>
         <tbody>
-          <tr><td>👤 ประวัติพนักงาน</td><td>ข้อมูลส่วนตัว · ครอบครัว · การศึกษา · ประวัติการทำงาน · เอกสาร · ทีมของฉัน · ความก้าวหน้าในสายอาชีพ</td></tr>
-          <tr><td>📊 รายงาน</td><td>รายงานทุกประเภท (ดูหัวข้อ 15)</td></tr>
-          <tr><td>⚙️ ตั้งค่า</td><td>เปลี่ยนภาษา (ไทย/English/Burmese) · บันทึกการเข้าระบบ · บันทึกภาพหน้าจอ · Login ด้วย Face/ลายนิ้วมือ · เปลี่ยนรหัสผ่าน · Version แอป</td></tr>
-          <tr><td>📷 สแกน QR Code</td><td>ตัวสแกน QR Code ภายในแอป</td></tr>
-          <tr><td>🚪 ออกจากระบบ</td><td>Logout ออกจากระบบ Tiger OpenSpace</td></tr>
+          <tr>
+            <td><strong class="bi" data-th="✅ ลาเต็มวัน" data-en="✅ Full Day">✅ ลาเต็มวัน</strong></td>
+            <td class="bi" data-th="ระบุวันเริ่มต้น และวันสิ้นสุด" data-en="Select start date and end date">ระบุวันเริ่มต้น และวันสิ้นสุด</td>
+            <td class="bi" data-th="01/01/68 ถึง 03/01/68 ระบบตัดวันหยุดอัตโนมัติ" data-en="01/01/25 to 03/01/25, holidays auto-excluded">01/01/68 ถึง 03/01/68 ระบบตัดวันหยุดอัตโนมัติ</td>
+          </tr>
+          <tr>
+            <td><strong class="bi" data-th="⏰ ลาช่วงเวลา" data-en="⏰ Time Range">⏰ ลาช่วงเวลา</strong></td>
+            <td class="bi" data-th="ระบุวันที่และช่วงเวลา" data-en="Select date and time range">ระบุวันที่และช่วงเวลา</td>
+            <td class="bi" data-th="ลา 09:00 ถึง 12:00 น." data-en="Leave 09:00 to 12:00">ลา 09:00 ถึง 12:00 น.</td>
+          </tr>
+          <tr>
+            <td><strong class="bi" data-th="🌅 ลาครึ่งวัน" data-en="🌅 Half Day">🌅 ลาครึ่งวัน</strong></td>
+            <td class="bi" data-th="เลือก เช้า หรือ บ่าย" data-en="Select Morning or Afternoon">เลือก เช้า หรือ บ่าย</td>
+            <td class="bi" data-th="ครึ่งวันแรก เช้า หรือ ครึ่งวันหลัง บ่าย" data-en="First half morning or second half afternoon">ครึ่งวันแรก เช้า หรือ ครึ่งวันหลัง บ่าย</td>
+          </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div class="info-box red"><span class="ico">📌</span><div class="info-box-text"><strong class="bi" data-th="กรณีลงข้อมูลผิด" data-en="If Data Entered Incorrectly">กรณีลงข้อมูลผิด</strong> <span class="bi" data-th="สถานะ รออนุมัติ สามารถลบและบันทึกใหม่ได้ สถานะ อนุมัติ ต้องแจ้ง Admin HR" data-en="Pending status: can delete and re-submit. Approved status: must contact Admin HR">สถานะ รออนุมัติ สามารถลบและบันทึกใหม่ได้ สถานะ อนุมัติ ต้องแจ้ง Admin HR</span></div></div>
+  <div class="info-box warn"><span class="ico">⚠️</span><div class="info-box-text"><span class="bi" data-th="หากลาแบบเว้นวัน เช่น เฉพาะวันจันทร์พุธศุกร์ ต้องยื่นคำขอลาแยกทีละใบ" data-en="For non-consecutive leave such as Mon Wed Fri only, submit separate leave requests">หากลาแบบเว้นวัน เช่น เฉพาะวันจันทร์พุธศุกร์ ต้องยื่นคำขอลาแยกทีละใบ</span></div></div>
+</div><hr class="div">
+
+<div class="section" id="ot">
+  <div class="section-header">
+    <div class="step-badge">6</div>
+    <div class="sec-title">
+      <h2 class="bi" data-th="⏱️ การขอทำงานล่วงเวลา (OT)" data-en="⏱️ Overtime (OT) Request">⏱️ การขอทำงานล่วงเวลา (OT)</h2>
+      <div class="en bi" data-th="Overtime Request" data-en="Overtime Request">Overtime Request</div>
+    </div>
+  </div>
+  <div class="ot-grid">
+    <div class="ot-card">
+      <div class="ot-code">(S)</div>
+      <div class="ot-name bi" data-th="ขอ OT ก่อนเริ่มงาน" data-en="OT Before Work">ขอ OT ก่อนเริ่มงาน</div>
+      <div class="ot-desc bi" data-th="OT ก่อนงาน และวันหยุด" data-en="OT Before Work and Holiday">OT ก่อนงาน และวันหยุด</div>
+    </div>
+    <div class="ot-card">
+      <div class="ot-code">(E)</div>
+      <div class="ot-name bi" data-th="ขอ OT หลังเลิกงาน" data-en="OT After Work">ขอ OT หลังเลิกงาน</div>
+      <div class="ot-desc bi" data-th="OT หลังเลิกงาน" data-en="OT After Work">OT หลังเลิกงาน</div>
+    </div>
+    <div class="ot-card">
+      <div class="ot-code">(B)</div>
+      <div class="ot-name bi" data-th="ขอ OT พักเที่ยง" data-en="OT During Lunch">ขอ OT พักเที่ยง</div>
+      <div class="ot-desc bi" data-th="OT ช่วงพักกลางวัน" data-en="OT During Lunch Break">OT ช่วงพักกลางวัน</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:13px;">
+    <div class="card-header"><span class="bi" data-th="📝 ขั้นตอนการขอ OT (S และ E)" data-en="📝 OT Request Steps (S and E)">📝 ขั้นตอนการขอ OT (S และ E)</span></div>
+    <div class="card-body"><ul class="steps">
+      <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong class="bi" data-th="ระบุวันที่ขอ OT วันเริ่มต้นและวันสิ้นสุด" data-en="Select OT date, start and end date">ระบุวันที่ขอ OT วันเริ่มต้นและวันสิ้นสุด</strong></div></li>
+      <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong class="bi" data-th="เลือกประเภท OT: S E หรือ B" data-en="Select OT type: S, E, or B">เลือกประเภท OT: S E หรือ B</strong></div></li>
+      <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong class="bi" data-th="ระบุชื่องานหรือหัวข้อในการทำ OT" data-en="Enter job name or OT topic">ระบุชื่องานหรือหัวข้อในการทำ OT</strong></div></li>
+      <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong class="bi" data-th="ระบุช่วงเวลา OT จาก ถึง ระบบคำนวณระยะเวลาให้" data-en="Enter OT time range from-to, system calculates duration">ระบุช่วงเวลา OT จาก ถึง ระบบคำนวณระยะเวลาให้</strong></div></li>
+      <li class="step-item"><div class="step-dot">5</div><div class="step-body"><strong class="bi" data-th="กด ยืนยัน" data-en="Tap Confirm">กด ยืนยัน</strong></div></li>
+    </ul></div>
+  </div>
+  <div class="card">
+    <div class="card-header"><span class="bi" data-th="🌟 OT พิเศษ" data-en="🌟 Special OT">🌟 OT พิเศษ</span></div>
+    <div class="card-body">
+      <p style="color:var(--slate);font-size:13px;margin-bottom:10px;"
+         class="bi" data-th="ใช้เมื่อพนักงานได้รับ OT พิเศษ ทำหลายช่วงเวลา ควบกะงาน หรือได้เงินพิเศษ"
+         data-en="Use when employee receives special OT: multiple time slots, shift overlap, or special allowances">
+         ใช้เมื่อพนักงานได้รับ OT พิเศษ ทำหลายช่วงเวลา ควบกะงาน หรือได้เงินพิเศษ</p>
+      <table class="data-table">
+        <thead><tr>
+          <th class="bi" data-th="ช่อง" data-en="Field">ช่อง</th>
+          <th class="bi" data-th="รายละเอียด" data-en="Description">รายละเอียด</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>โอที1 – โอที6</td><td class="bi" data-th="ระบุจำนวนชั่วโมงในแต่ละอัตรา OT" data-en="Enter hours for each OT rate tier">ระบุจำนวนชั่วโมงในแต่ละอัตรา OT</td></tr>
+          <tr><td class="bi" data-th="ค่ากะโอที" data-en="Shift Allowance">ค่ากะโอที</td><td class="bi" data-th="จำนวนเงิน บาท" data-en="Amount THB">จำนวนเงิน บาท</td></tr>
+          <tr><td class="bi" data-th="ค่าอาหารโอที" data-en="Meal Allowance">ค่าอาหารโอที</td><td class="bi" data-th="จำนวนเงิน บาท" data-en="Amount THB">จำนวนเงิน บาท</td></tr>
+          <tr><td class="bi" data-th="เงินพิเศษ" data-en="Special Bonus">เงินพิเศษ</td><td class="bi" data-th="เงินพิเศษอื่นๆ ถ้ามี" data-en="Additional special payment if any">เงินพิเศษอื่นๆ ถ้ามี</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box red"><span class="ico">📌</span><div class="info-box-text"><span class="bi" data-th="OT พิเศษ สามารถขอได้เฉพาะ OT จ่ายเงินเท่านั้น" data-en="Special OT can only be requested as cash payment">OT พิเศษ สามารถขอได้เฉพาะ OT จ่ายเงินเท่านั้น</span></div></div>
+    </div>
+  </div>
+  <div class="info-box tip"><span class="ico">💡</span><div class="info-box-text"><strong class="bi" data-th="ยกเลิก OT" data-en="Cancel OT">ยกเลิก OT</strong> <span class="bi" data-th="หน้าการแจ้งเตือน คำขอของฉัน เลือกคำขอ OT กด ยกเลิกคำขอ" data-en="Notifications, My Requests, select OT request, tap Cancel Request">หน้าการแจ้งเตือน คำขอของฉัน เลือกคำขอ OT กด ยกเลิกคำขอ</span></div></div>
+</div><hr class="div">
+
+<div class="section" id="recordtime">
+  <div class="section-header">
+    <div class="step-badge">7</div>
+    <div class="sec-title">
+      <h2 class="bi" data-th="⏰ บันทึกเวลาทำงาน (Record Time)" data-en="⏰ Record Time">⏰ บันทึกเวลาทำงาน (Record Time)</h2>
+      <div class="en bi" data-th="Manual Time Recording" data-en="Manual Time Recording">Manual Time Recording</div>
+    </div>
+  </div>
+  <div class="info-box warn"><span class="ico">⚠️</span><div class="info-box-text"><strong class="bi" data-th="ใช้เมื่อ" data-en="When to Use">ใช้เมื่อ</strong> <span class="bi" data-th="ลืมสแกนนิ้ว หรือลืมเช็คอิน ต้องผ่านการอนุมัติจากหัวหน้าหรือฝ่ายบุคคลเท่านั้น" data-en="Forgot fingerprint scan or check-in. Requires supervisor or HR approval">ลืมสแกนนิ้ว หรือลืมเช็คอิน ต้องผ่านการอนุมัติจากหัวหน้าหรือฝ่ายบุคคลเท่านั้น</span></div></div>
+  <div class="card">
+    <div class="card-header"><span class="bi" data-th="📋 บันทึก 1 ช่วง เข้า หรือ ออก" data-en="📋 Record Time In or Out Only">📋 บันทึก 1 ช่วง เข้า หรือ ออก</span></div>
+    <div class="card-body"><ul class="steps">
+      <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong class="bi" data-th="ระบุวันที่ขอลงเวลา" data-en="Select the date to record time">ระบุวันที่ขอลงเวลา</strong></div></li>
+      <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong class="bi" data-th="ระบุเวลาที่ต้องการลง" data-en="Enter the time to record">ระบุเวลาที่ต้องการลง</strong></div></li>
+      <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong class="bi" data-th="เลือกสถานะ ลงเวลาเข้า หรือ ลงเวลาออก" data-en="Select status: Clock In or Clock Out">เลือกสถานะ ลงเวลาเข้า หรือ ลงเวลาออก</strong></div></li>
+      <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong class="bi" data-th="กด ยืนยัน" data-en="Tap Confirm">กด ยืนยัน</strong></div></li>
+    </ul></div>
+  </div>
+  <div class="card">
+    <div class="card-header"><span class="bi" data-th="📋 บันทึกทั้ง 2 ช่วง เข้า และ ออก" data-en="📋 Record Time In and Out">📋 บันทึกทั้ง 2 ช่วง เข้า และ ออก</span></div>
+    <div class="card-body"><ul class="steps">
+      <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong class="bi" data-th="ระบุวันที่เริ่มต้นและเวลาเข้างาน" data-en="Select start date and clock-in time">ระบุวันที่เริ่มต้นและเวลาเข้างาน</strong></div></li>
+      <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong class="bi" data-th="ระบุวันที่สิ้นสุดและเวลาออกงาน" data-en="Select end date and clock-out time">ระบุวันที่สิ้นสุดและเวลาออกงาน</strong></div></li>
+      <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong class="bi" data-th="สถานะ ลงเวลาออก แล้วกด ยืนยัน" data-en="Set status to Clock Out then tap Confirm">สถานะ ลงเวลาออก แล้วกด ยืนยัน</strong></div></li>
+    </ul></div>
+  </div>
+</div><hr class="div">
+
+<div class="section" id="approval">
+  <div class="section-header">
+    <div class="step-badge">8</div>
+    <div class="sec-title">
+      <h2 class="bi" data-th="✅ การอนุมัติ (Approval)" data-en="✅ Approval">✅ การอนุมัติ (Approval)</h2>
+      <div class="en bi" data-th="For Managers and Supervisors" data-en="For Managers and Supervisors">For Managers and Supervisors</div>
+    </div>
+  </div>
+  <div class="info-box tip"><span class="ico">👔</span><div class="info-box-text"><strong class="bi" data-th="สำหรับผู้จัดการ และหัวหน้างาน" data-en="For Managers and Supervisors">สำหรับผู้จัดการ และหัวหน้างาน</strong> <span class="bi" data-th="ฟีเจอร์นี้แสดงเฉพาะผู้มีสิทธิ์อนุมัติเท่านั้น" data-en="This feature is only visible to users with approval permission">ฟีเจอร์นี้แสดงเฉพาะผู้มีสิทธิ์อนุมัติเท่านั้น</span></div></div>
+  <div class="card">
+    <div class="card-header"><span class="bi" data-th="📋 ขั้นตอนการอนุมัติ" data-en="📋 Approval Steps">📋 ขั้นตอนการอนุมัติ</span></div>
+    <div class="card-body"><ul class="steps">
+      <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong class="bi" data-th="กด 🔔 และเลือกแท็บ คำขอของฉัน" data-en="Tap 🔔 and select My Requests tab">กด 🔔 และเลือกแท็บ คำขอของฉัน</strong><p><span class="bi" data-th="ดูรายการทั้งหมดที่รอการอนุมัติ จัดกลุ่มตามประเภท" data-en="View all pending items grouped by type">ดูรายการทั้งหมดที่รอการอนุมัติ จัดกลุ่มตามประเภท</span></p></div></li>
+      <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong class="bi" data-th="กรองข้อมูล ถ้าต้องการ" data-en="Filter data if needed">กรองข้อมูล ถ้าต้องการ</strong><p><span class="bi" data-th="กด 🔍 กรองตามรหัสพนักงาน ฝ่าย แผนก หรือ Toggle แสดงรายการที่รออนุมัติ" data-en="Tap 🔍 to filter by employee code, department, or toggle Show Pending Only">กด 🔍 กรองตามรหัสพนักงาน ฝ่าย แผนก หรือ Toggle แสดงรายการที่รออนุมัติ</span></p></div></li>
+      <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong class="bi" data-th="เลือกทีละรายการ หรือติ๊กหลายรายการพร้อมกัน" data-en="Select one by one or tick multiple items">เลือกทีละรายการ หรือติ๊กหลายรายการพร้อมกัน</strong><p><span class="bi" data-th="กด เลือกทั้งหมด เพื่อเลือกทุกรายการ" data-en="Tap Select All to choose all items">กด เลือกทั้งหมด เพื่อเลือกทุกรายการ</span></p></div></li>
+      <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong class="bi" data-th="กด ✅ อนุมัติ หรือ ❌ ปฏิเสธ" data-en="Tap ✅ Approve or ❌ Reject">กด ✅ อนุมัติ หรือ ❌ ปฏิเสธ</strong><p><span class="bi" data-th="แถบขาว คือ เปิดอ่านแล้ว แถบแดง คือ ยังไม่เคยเปิดอ่าน" data-en="White bar means already read. Red bar means unread">แถบขาว คือ เปิดอ่านแล้ว แถบแดง คือ ยังไม่เคยเปิดอ่าน</span></p></div></li>
+    </ul></div>
+  </div>
+</div><hr class="div">
+
+<div class="section" id="teamcal">
+  <div class="section-header">
+    <div class="step-badge">9</div>
+    <div class="sec-title">
+      <h2 class="bi" data-th="👥 ปฏิทินการทำงานทีม" data-en="👥 Team Calendar">👥 ปฏิทินการทำงานทีม</h2>
+      <div class="en bi" data-th="Team Calendar" data-en="Team Working Calendar">Team Calendar</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><span class="bi" data-th="📆 ส่งคำขอแทนพนักงาน" data-en="📆 Submit Requests on Behalf of Staff">📆 ส่งคำขอแทนพนักงาน</span></div>
+    <div class="card-body"><ul class="steps">
+      <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong class="bi" data-th="แตะ 📅 ที่แถบล่าง และสลับแท็บ ปฏิทินการทำงานทีม" data-en="Tap 📅 in bottom bar and switch to Team Calendar tab">แตะ 📅 ที่แถบล่าง และสลับแท็บ ปฏิทินการทำงานทีม</strong></div></li>
+      <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong class="bi" data-th="กด ⊕ ที่ชื่อพนักงาน เพื่อส่งคำขอแทน" data-en="Tap ⊕ next to employee name to submit on their behalf">กด ⊕ ที่ชื่อพนักงาน เพื่อส่งคำขอแทน</strong><p><span class="bi" data-th="ประเภทที่ทำแทนได้: ลา OT บันทึกเวลา เปลี่ยนกะงาน สลับกะงาน" data-en="Supported: Leave, OT, Record Time, Shift Exchange, Shift Swap">ประเภทที่ทำแทนได้: ลา OT บันทึกเวลา เปลี่ยนกะงาน สลับกะงาน</span></p></div></li>
+    </ul></div>
+  </div>
+</div><hr class="div">
+
+<div class="section" id="payslip">
+  <div class="section-header">
+    <div class="step-badge">10</div>
+    <div class="sec-title">
+      <h2 class="bi" data-th="💰 สลิปเงินเดือน (PaySlip)" data-en="💰 Pay Slip">💰 สลิปเงินเดือน (PaySlip)</h2>
+      <div class="en bi" data-th="View and Download Payslip" data-en="View and Download Payslip">View and Download Payslip</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><span class="bi" data-th="📄 วิธีดูและดาวน์โหลดสลิปเงินเดือน" data-en="📄 How to View and Download Pay Slip">📄 วิธีดูและดาวน์โหลดสลิปเงินเดือน</span></div>
+    <div class="card-body"><ul class="steps">
+      <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong class="bi" data-th="เพิ่มเติม ☰ จากนั้น ประวัติพนักงาน จากนั้น ระบบเงินเดือน" data-en="More ☰, then Employee Profile, then Payroll System">เพิ่มเติม ☰ จากนั้น ประวัติพนักงาน จากนั้น ระบบเงินเดือน</strong></div></li>
+      <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong class="bi" data-th="เลือกสลิปที่ต้องการ ระบุ ปี เดือน งวด" data-en="Select pay slip, choose year, month, period">เลือกสลิปที่ต้องการ ระบุ ปี เดือน งวด</strong><p><span class="bi" data-th="เช่น ปี 2568 เดือนสิงหาคม งวด 01" data-en="e.g. Year 2025, August, Period 01">เช่น ปี 2568 เดือนสิงหาคม งวด 01</span></p></div></li>
+      <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong class="bi" data-th="กด Download เพื่อบันทึก PDF ลงเครื่อง" data-en="Tap Download to save PDF to your device">กด Download เพื่อบันทึก PDF ลงเครื่อง</strong><p><span class="bi" data-th="ชื่อไฟล์: payslip_2568_08_01.pdf" data-en="File name: payslip_2568_08_01.pdf">ชื่อไฟล์: payslip_2568_08_01.pdf</span></p></div></li>
+    </ul></div>
+  </div>
+</div><hr class="div">
+
+<div class="section" id="reports">
+  <div class="section-header">
+    <div class="step-badge">11</div>
+    <div class="sec-title">
+      <h2 class="bi" data-th="📊 รายงาน (Reports)" data-en="📊 Reports">📊 รายงาน (Reports)</h2>
+      <div class="en bi" data-th="Available Reports" data-en="Available Reports — More then Reports">Available Reports</div>
+    </div>
+  </div>
+  <div class="mod-grid">
+    <div class="mod-card"><span class="mod-icon">⏰</span><div class="mod-name bi" data-th="ข้อมูลดิบลงเวลา" data-en="Worktime Raw Data">ข้อมูลดิบลงเวลา</div></div>
+    <div class="mod-card"><span class="mod-icon">📋</span><div class="mod-name bi" data-th="ข้อมูลหลังประมวลผล" data-en="After Processing">ข้อมูลหลังประมวลผล</div></div>
+    <div class="mod-card"><span class="mod-icon">🏖️</span><div class="mod-name bi" data-th="ตรวจสิทธิ์ลา" data-en="Statutory Leave">ตรวจสิทธิ์ลา</div></div>
+    <div class="mod-card"><span class="mod-icon">📅</span><div class="mod-name bi" data-th="ประวัติการลา" data-en="Leave History">ประวัติการลา</div></div>
+    <div class="mod-card"><span class="mod-icon">⏱️</span><div class="mod-name bi" data-th="ประวัติขอ OT" data-en="OT History">ประวัติขอ OT</div></div>
+    <div class="mod-card"><span class="mod-icon">💰</span><div class="mod-name bi" data-th="ส่งระบบเงินเดือน" data-en="Payroll System">ส่งระบบเงินเดือน</div></div>
+    <div class="mod-card"><span class="mod-icon">🎌</span><div class="mod-name bi" data-th="วันหยุดประจำปี" data-en="Holiday Report">วันหยุดประจำปี</div></div>
+    <div class="mod-card"><span class="mod-icon">📍</span><div class="mod-name bi" data-th="ประวัติเช็คอิน" data-en="Check-In Report">ประวัติเช็คอิน</div></div>
+  </div>
+  <div class="info-box red"><span class="ico">📌</span><div class="info-box-text"><strong class="bi" data-th="หมายเหตุ" data-en="Note">หมายเหตุ</strong> <span class="bi" data-th="ข้อมูลดิบลงเวลา ย้อนหลัง 45 วัน ข้อมูลหลังประมวลผล ย้อนหลังได้ 1 ปี OT จะปรากฏหลัง HR ประมวลผลเท่านั้น" data-en="Raw data: last 45 days. Processed data: up to 1 year. OT appears only after HR processes payroll">ข้อมูลดิบลงเวลา ย้อนหลัง 45 วัน ข้อมูลหลังประมวลผล ย้อนหลังได้ 1 ปี OT จะปรากฏหลัง HR ประมวลผลเท่านั้น</span></div></div>
+  <div class="info-box tip"><span class="ico">👔</span><div class="info-box-text"><strong class="bi" data-th="Supervisor" data-en="Supervisor">Supervisor</strong> <span class="bi" data-th="กด 🔍 กรองตาม รหัสพนักงาน ฝ่าย แผนก เพื่อดูข้อมูลทีม" data-en="Tap 🔍 to filter by employee code, department, or division to view team data">กด 🔍 กรองตาม รหัสพนักงาน ฝ่าย แผนก เพื่อดูข้อมูลทีม</span></div></div>
+</div><hr class="div">
+
+<div class="section" id="more">
+  <div class="section-header">
+    <div class="step-badge">12</div>
+    <div class="sec-title">
+      <h2 class="bi" data-th="☰ เพิ่มเติม (More)" data-en="☰ More">☰ เพิ่มเติม (More)</h2>
+      <div class="en bi" data-th="Settings Profile and More" data-en="Settings Profile and More">Settings Profile and More</div>
+    </div>
+  </div>
+  <table class="data-table">
+    <thead><tr>
+      <th class="bi" data-th="เมนู" data-en="Menu">เมนู</th>
+      <th class="bi" data-th="รายละเอียด" data-en="Description">รายละเอียด</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="bi" data-th="👤 ประวัติพนักงาน" data-en="👤 Employee Profile">👤 ประวัติพนักงาน</td>
+        <td class="bi" data-th="ข้อมูลส่วนตัว ครอบครัว การศึกษา ประวัติการทำงาน เอกสาร ทีมของฉัน" data-en="Personal info, Family, Education, Work history, Documents, My Team">ข้อมูลส่วนตัว ครอบครัว การศึกษา ประวัติการทำงาน เอกสาร ทีมของฉัน</td>
+      </tr>
+      <tr>
+        <td class="bi" data-th="📊 รายงาน" data-en="📊 Reports">📊 รายงาน</td>
+        <td class="bi" data-th="รายงานทุกประเภท ดูหัวข้อ 11" data-en="All report types, see section 11">รายงานทุกประเภท ดูหัวข้อ 11</td>
+      </tr>
+      <tr>
+        <td class="bi" data-th="⚙️ ตั้งค่า" data-en="⚙️ Settings">⚙️ ตั้งค่า</td>
+        <td class="bi" data-th="เปลี่ยนภาษา บันทึกการเข้าระบบ บันทึกภาพหน้าจอ Login ด้วย Face หรือลายนิ้วมือ เปลี่ยนรหัสผ่าน Version แอป" data-en="Change language, Login log, Screenshot permission, Face or Fingerprint login, Change password, App version">เปลี่ยนภาษา บันทึกการเข้าระบบ บันทึกภาพหน้าจอ Login ด้วย Face หรือลายนิ้วมือ เปลี่ยนรหัสผ่าน Version แอป</td>
+      </tr>
+      <tr>
+        <td class="bi" data-th="📷 สแกน QR Code" data-en="📷 Scan QR Code">📷 สแกน QR Code</td>
+        <td class="bi" data-th="ตัวสแกน QR Code ภายในแอป" data-en="In-app QR Code scanner">ตัวสแกน QR Code ภายในแอป</td>
+      </tr>
+      <tr>
+        <td class="bi" data-th="🚪 ออกจากระบบ" data-en="🚪 Logout">🚪 ออกจากระบบ</td>
+        <td class="bi" data-th="Logout ออกจากระบบ Tiger OpenSpace" data-en="Logout from Tiger OpenSpace">Logout ออกจากระบบ Tiger OpenSpace</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
       <!-- Footer -->
       <div style="margin-top:42px;padding:28px;background:var(--navy);border-radius:14px;text-align:center;">
@@ -626,6 +575,31 @@ const obs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.25 });
 secs.forEach(s => obs.observe(s));
+
+// ── BILINGUAL ──────────────────────────────────────────────────────────
+
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  document.getElementById('btn-th').classList.toggle('active', lang === 'th');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.querySelectorAll('[data-th][data-en]').forEach(function(el) {
+    var val = lang === 'th' ? el.dataset.th : el.dataset.en;
+    if (el.children.length === 0) {
+      el.textContent = val;
+    } else {
+      el.innerHTML = val;
+    }
+  });
+  var hs = document.querySelector('.hero-sub');
+  if (hs) hs.textContent = lang === 'th'
+    ? 'คู่มือการใช้งานแอปพลิเคชันสำหรับพนักงานและผู้จัดการ · TIGERSOFT (1998)'
+    : 'User Guide for Employees & Managers · TIGERSOFT (1998)';
+  document.title = lang === 'th'
+    ? 'คู่มือ Tiger OpenSpace MSS Mobile Application'
+    : 'Tiger OpenSpace MSS Mobile App - User Manual';
+}
+
+
 </script>
 </body>
 </html>
