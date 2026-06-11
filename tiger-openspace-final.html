@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือ Tiger OpenSpace MSS Mobile Application</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Kanit:wght@500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #C41230; --red-dark: #9B0E26; --red-pale: #FFF0F2;
+  --navy: #0D1B2E; --navy-mid: #1A2F4A; --slate: #4A6580;
+  --silver: #EEF2F6; --white: #FFFFFF; --text: #1A2B3C; --muted: #6B8299;
+  --success: #16A34A; --warn: #D97706; --radius: 12px;
+  --shadow: 0 2px 16px rgba(13,27,46,0.09); --shadow-md: 0 6px 28px rgba(13,27,46,0.13);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Sarabun', sans-serif; background: #F3F6FA; color: var(--text); font-size: 15px; line-height: 1.7; }
+
+.sidebar { position: fixed; top: 0; left: 0; width: 252px; height: 100vh; background: var(--navy); overflow-y: auto; z-index: 100; display: flex; flex-direction: column; }
+.sidebar-logo { padding: 22px 18px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.logo-wrap { display: flex; align-items: center; gap: 10px; }
+.logo-icon { width: 38px; height: 38px; background: var(--red); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.logo-text { font-family: 'Kanit', sans-serif; color: white; font-size: 13.5px; font-weight: 700; line-height: 1.25; }
+.logo-text span { color: rgba(255,255,255,0.45); font-weight: 400; font-size: 10.5px; display: block; }
+.nav-group { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.nav-group-label { padding: 8px 18px 3px; color: rgba(255,255,255,0.28); font-size: 9.5px; letter-spacing: 1.4px; text-transform: uppercase; font-weight: 600; }
+.nav-item { display: flex; align-items: center; gap: 9px; padding: 8px 18px; color: rgba(255,255,255,0.58); text-decoration: none; font-size: 12.5px; transition: all 0.18s; cursor: pointer; border-left: 3px solid transparent; }
+.nav-item:hover, .nav-item.active { background: rgba(196,18,48,0.13); color: #FF8A9A; border-left-color: var(--red); }
+.nav-num { width: 19px; height: 19px; background: rgba(255,255,255,0.07); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 700; flex-shrink: 0; font-family: 'JetBrains Mono', monospace; }
+.nav-item.active .nav-num { background: var(--red); color: white; }
+.sidebar-footer { margin-top: auto; padding: 14px 18px; }
+.ver-badge { background: rgba(255,255,255,0.06); border-radius: 8px; padding: 10px 13px; color: rgba(255,255,255,0.38); font-size: 11px; }
+.ver-badge strong { color: rgba(255,255,255,0.58); display: block; margin-bottom: 2px; }
+
+.main { margin-left: 252px; min-height: 100vh; }
+
+.hero { background: linear-gradient(135deg, #8B0A1F 0%, var(--red) 45%, #E02040 100%); padding: 50px 54px 42px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 340px; height: 340px; background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 65%); border-radius: 50%; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.88); padding: 5px 13px; border-radius: 20px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; margin-bottom: 16px; }
+.hero h1 { font-family: 'Kanit', sans-serif; color: white; font-size: 34px; font-weight: 800; line-height: 1.2; margin-bottom: 8px; position: relative; z-index: 1; }
+.hero-sub { color: rgba(255,255,255,0.62); font-size: 13.5px; margin-bottom: 26px; position: relative; z-index: 1; }
+.hero-pills { display: flex; flex-wrap: wrap; gap: 8px; position: relative; z-index: 1; }
+.pill { background: rgba(255,255,255,0.11); border: 1px solid rgba(255,255,255,0.17); color: rgba(255,255,255,0.82); padding: 4px 12px; border-radius: 20px; font-size: 11.5px; }
+
+.content { padding: 42px 54px; max-width: 860px; }
+.section { margin-bottom: 50px; scroll-margin-top: 20px; }
+
+.section-header { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 22px; }
+.step-badge { width: 46px; height: 46px; background: var(--red); color: white; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 700; flex-shrink: 0; box-shadow: 0 4px 13px rgba(196,18,48,0.33); }
+.sec-title h2 { font-family: 'Kanit', sans-serif; font-size: 20px; font-weight: 700; color: var(--navy); }
+.sec-title .en { color: var(--muted); font-size: 12px; font-style: italic; margin-top: 2px; }
+
+.card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 13px; }
+.card-header { background: var(--navy); color: white; padding: 12px 19px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.card-header.red { background: var(--red); }
+.card-body { padding: 18px 20px; }
+
+.steps { list-style: none; }
+.step-item { display: flex; gap: 13px; padding: 12px 0; border-bottom: 1px solid var(--silver); }
+.step-item:last-child { border-bottom: none; }
+.step-dot { width: 28px; height: 28px; background: var(--red-pale); border: 2px solid var(--red); color: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+.step-body strong { display: block; color: var(--navy); font-weight: 700; font-size: 14px; }
+.step-body .en { color: var(--muted); font-size: 11.5px; font-style: italic; display: block; margin-bottom: 3px; }
+.step-body p { color: var(--slate); font-size: 13px; }
+
+.info-box { border-radius: 10px; padding: 13px 17px; margin: 11px 0; display: flex; gap: 11px; }
+.info-box.tip { background: #F0FDF4; border-left: 4px solid var(--success); }
+.info-box.warn { background: #FFFBEB; border-left: 4px solid var(--warn); }
+.info-box.red { background: var(--red-pale); border-left: 4px solid var(--red); }
+.info-box .ico { font-size: 17px; flex-shrink: 0; margin-top: 1px; }
+.info-box-text { font-size: 13px; }
+.info-box-text strong { font-weight: 700; display: block; margin-bottom: 2px; }
+
+.feat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px; }
+.feat { background: white; border-radius: 10px; padding: 16px; box-shadow: var(--shadow); border-top: 3px solid var(--red); }
+.feat-icon { font-size: 24px; margin-bottom: 7px; display: block; }
+.feat-title { font-weight: 700; color: var(--navy); font-size: 13.5px; }
+.feat-en { color: var(--muted); font-size: 11px; font-style: italic; }
+.feat-desc { color: var(--slate); font-size: 12.5px; margin-top: 5px; }
+
+.mod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+.mod-card { background: white; border-radius: 10px; padding: 14px 10px; box-shadow: var(--shadow); text-align: center; }
+.mod-icon { font-size: 24px; margin-bottom: 6px; display: block; }
+.mod-name { font-weight: 700; color: var(--navy); font-size: 12px; }
+.mod-en { color: var(--muted); font-size: 10px; margin-top: 2px; }
+
+.bottom-nav { display: flex; background: white; border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; margin: 14px 0; }
+.bn-item { flex: 1; padding: 13px 6px; text-align: center; border-right: 1px solid var(--silver); }
+.bn-item:last-child { border-right: none; }
+.bn-item.active-bn { background: var(--red-pale); }
+.bn-icon { font-size: 20px; display: block; margin-bottom: 3px; }
+.bn-label { font-size: 10.5px; color: var(--slate); font-weight: 600; }
+.bn-item.active-bn .bn-label { color: var(--red); }
+
+.data-table { width: 100%; border-collapse: collapse; background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.data-table th { background: var(--navy); color: white; padding: 11px 15px; text-align: left; font-size: 12.5px; font-weight: 700; }
+.data-table td { padding: 10px 15px; font-size: 13px; border-bottom: 1px solid var(--silver); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:nth-child(even) td { background: #FAFCFE; }
+
+.ot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.ot-card { background: white; border-radius: 10px; padding: 14px; box-shadow: var(--shadow); border-top: 3px solid var(--red); }
+.ot-code { font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 700; color: var(--red); }
+.ot-name { font-weight: 700; color: var(--navy); font-size: 12.5px; margin-top: 4px; }
+.ot-desc { color: var(--slate); font-size: 11.5px; margin-top: 3px; }
+
+hr.div { border: none; height: 1px; background: linear-gradient(to right, var(--red), transparent); margin: 38px 0; opacity: 0.22; }
+
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.11); border-radius: 3px; }
+
+@media (max-width: 800px) {
+  .sidebar { display: none; } .main { margin-left: 0; }
+  .hero, .content { padding: 26px 18px; }
+  .feat-grid, .ot-grid { grid-template-columns: 1fr 1fr; }
+  .mod-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media print { .sidebar { display: none; } .main { margin-left: 0; } }
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-wrap" style="align-items:center;">
+      <img src="data:image/png;base64,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" alt="Tiger OpenSpace" style="height:36px; display:block;">
+    </div>
+    <div style="margin-top:6px; color:rgba(255,255,255,0.4); font-size:10px; letter-spacing:0.5px;">MSS Mobile Application</div>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">เริ่มต้น</div>
+        <a href="#login" class="nav-item"><span class="nav-num">1</span> เข้าสู่ระบบ (Login)</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">หน้าหลัก</div>
+    <a href="#home" class="nav-item"><span class="nav-num">2</span> หน้าหลัก (Home)</a>
+    <a href="#quickmenu" class="nav-item"><span class="nav-num">3</span> เมนูลัด (Quick Menu)</a>
+    <a href="#calendar" class="nav-item"><span class="nav-num">4</span> ปฏิทิน (Calendar)</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">คำขอ</div>
+    <a href="#checkin" class="nav-item"><span class="nav-num">5</span> เช็คอิน (Check-in)</a>
+    <a href="#leave" class="nav-item"><span class="nav-num">6</span> ขอลา (Leave)</a>
+    <a href="#ot" class="nav-item"><span class="nav-num">7</span> ขอ OT</a>
+    <a href="#recordtime" class="nav-item"><span class="nav-num">8</span> บันทึกเวลาทำงาน</a>
+    <a href="#shift" class="nav-item"><span class="nav-num">9</span> เปลี่ยน/สลับกะ</a>
+    <a href="#claim" class="nav-item"><span class="nav-num">10</span> เบิกค่าใช้จ่าย</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">ผู้จัดการ</div>
+    <a href="#approval" class="nav-item"><span class="nav-num">11</span> อนุมัติ (Approval)</a>
+    <a href="#teamcal" class="nav-item"><span class="nav-num">12</span> ปฏิทินทีม</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">รายงาน</div>
+    <a href="#payslip" class="nav-item"><span class="nav-num">13</span> สลิปเงินเดือน</a>
+    <a href="#reports" class="nav-item"><span class="nav-num">14</span> รายงาน (Reports)</a>
+    <a href="#more" class="nav-item"><span class="nav-num">15</span> เพิ่มเติม (More)</a>
+  </div>
+  <div class="sidebar-footer">
+    <div class="ver-badge"><strong>🐯 Tiger OpenSpace</strong>Version 4.0.1 · MSS Mobile App<br>TIGERSOFT (1998)</div>
+  </div>
+</nav>
+
+<div class="main">
+  <div class="hero">
+    <div class="hero-eyebrow">📱 Official User Manual · คู่มือการใช้งานอย่างเป็นทางการ</div>
+    <div style="margin-bottom:14px; position:relative; z-index:1;">
+      <img src="data:image/png;base64,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" alt="Tiger OpenSpace" style="height:52px; display:block; filter:drop-shadow(0 1px 3px rgba(0,0,0,0.25));">
+    </div>
+    <h1 style="font-size:26px;">MSS Mobile Application</h1>
+    <div class="hero-sub">คู่มือการใช้งานแอปพลิเคชันสำหรับพนักงานและผู้จัดการ · TIGERSOFT (1998)</div>
+    <div class="hero-pills">
+      <span class="pill">📥 iOS App Store</span>
+      <span class="pill">🤖 Google Play</span>
+      <span class="pill">🌏 ไทย / English / Burmese</span>
+      <span class="pill">v4.0.1 (354)</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- 1: DOWNLOAD -->
+    
+
+    <!-- 2: LOGIN -->
+    <div class="section" id="login">
+      <div class="section-header">
+        <div class="step-badge">2</div>
+        <div class="sec-title"><h2>🔑 ขั้นตอนการเข้าสู่ระบบ</h2><div class="en">Login Steps</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header red">📲 ครั้งแรก: ลงทะเบียนบริษัท / First-Time Setup</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>เปิดแอป → กด "QR Code" เพื่อสแกน หรือกรอก URL บริษัท</strong><span class="en">Open App → Tap "QR Code" or Enter URL</span><p>ขอ QR Code / URL จาก HR ขององค์กร แล้วกด <strong>"Continue"</strong></p></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>กรอก Username = รหัสพนักงาน</strong><span class="en">Username = Employee ID (e.g., TG001, G001)</span></div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>กรอก Password แล้วกด "ไปต่อ"</strong><span class="en">Enter Password → Tap "Continue"</span><p>หรือใช้ <strong>บัญชี Microsoft</strong> หากองค์กรเปิดใช้งาน</p></div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-box warn"><span class="ico">⚠️</span><div class="info-box-text"><strong>หลังเข้าระบบครั้งแรก</strong> แนะนำให้เปลี่ยนรหัสผ่านทันที → เพิ่มเติม (☰) → ตั้งค่า → เปลี่ยนรหัสผ่าน</div></div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 3: HOME -->
+    <div class="section" id="home">
+      <div class="section-header">
+        <div class="step-badge">3</div>
+        <div class="sec-title"><h2>🏠 หน้าหลัก (Home)</h2><div class="en">Main Dashboard Overview</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">📋 ส่วนประกอบของหน้าหลัก / Home Screen Components</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">📢</div><div class="step-body"><strong>ข่าวประกาศจากฝ่ายบุคคล</strong><span class="en">HR Announcements</span><p>ประกาศล่าสุดจาก HR เช่น นโยบาย ข่าวสาร กิจกรรมบริษัท</p></div></li>
+            <li class="step-item"><div class="step-dot">⚡</div><div class="step-body"><strong>เมนูลัด (Quick Menu Widget)</strong><span class="en">Shortcut Icons</span><p>เช็คอิน · คำขอลา · OT · เปลี่ยนกะ · สลิปกะ · เบิกค่าใช้จ่าย · ปฏิทิน · สลิปเงินเดือน</p></div></li>
+            <li class="step-item"><div class="step-dot">📅</div><div class="step-body"><strong>วันของฉัน (My Day)</strong><span class="en">Today's Shift &amp; Attendance</span><p>กะงานวันนี้ · เวลาเข้า-ออก · สถานะการเข้างาน</p></div></li>
+            <li class="step-item"><div class="step-dot">✅</div><div class="step-body"><strong>รายการที่ต้องทำ (To-Do)</strong><span class="en">Tasks List</span><p>กด <strong>+</strong> เพิ่มรายการ · กด <strong>⋮</strong> เรียงหรือดูที่ทำเสร็จ · กด <strong>จัดการวิดเจ็ต</strong> เพื่อจัดหน้า Home</p></div></li>
+            <li class="step-item"><div class="step-dot">🏖️</div><div class="step-body"><strong>วันลาที่คงเหลือ</strong><span class="en">Leave Balance</span><p>ลาพักร้อน · ลาป่วย · ลากิจ และยอดคงเหลือ</p></div></li>
+            <li class="step-item"><div class="step-dot">👥</div><div class="step-body"><strong>ภาพรวมของทีม (Manager)</strong><span class="en">Team Overview — Manager Only</span><p>สมาชิกที่เข้างาน / ไม่มีข้อมูลเวลา</p></div></li>
+          </ul>
+        </div>
+      </div>
+      <p style="font-weight:700;color:var(--navy);margin:16px 0 8px;font-size:13.5px;">📱 แถบเมนูด้านล่าง / Bottom Navigation Bar</p>
+      <div class="bottom-nav">
+        <div class="bn-item active-bn"><span class="bn-icon">🏠</span><div class="bn-label">หน้าหลัก</div></div>
+        <div class="bn-item"><span class="bn-icon">📅</span><div class="bn-label">ปฏิทิน</div></div>
+        <div class="bn-item"><span class="bn-icon">➕</span><div class="bn-label">คำขอ</div></div>
+        <div class="bn-item"><span class="bn-icon">🔔</span><div class="bn-label">แจ้งเตือน</div></div>
+        <div class="bn-item"><span class="bn-icon">☰</span><div class="bn-label">เพิ่มเติม</div></div>
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 4: QUICK MENU -->
+    <div class="section" id="quickmenu">
+      <div class="section-header">
+        <div class="step-badge">4</div>
+        <div class="sec-title"><h2>⚡ เมนูลัด (Quick Menu)</h2><div class="en">Customize Widget Shortcuts</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">🔧 วิธีปรับแต่งเมนูลัด / How to Customize</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>กดไอคอน ✏️ ที่มุมของ Widget เมนูลัด</strong></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>กด ⊖ เพื่อนำออก · กด ⊕ เพื่อเพิ่ม Widget</strong><p>Widget ที่เพิ่มได้: ปฏิทินของฉัน · ประวัติพนักงาน · ทีมของฉัน · เอกสารของฉัน · เข้คอิน (พิกัด+รูปภาพ) · สงเวลาบันทึกงาน</p></div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>ลาก ⠿ เพื่อจัดเรียง แล้วกด "เสร็จสิ้น"</strong></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 5: CALENDAR -->
+    <div class="section" id="calendar">
+      <div class="section-header">
+        <div class="step-badge">5</div>
+        <div class="sec-title"><h2>📅 ปฏิทิน (Calendar)</h2><div class="en">Personal &amp; Team Calendar</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">📆 การใช้งานปฏิทิน</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>แตะ 📅 ที่แถบล่าง เพื่อเปิดหน้าปฏิทิน</strong><p>แสดงกะงาน เวลาเข้า-ออก และสิ่งที่ต้องทำในแต่ละวัน</p></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>กด ⠿ เพื่อเลือกมุมมองเพิ่มเติม</strong><p>กล่องข้อความแจ้งเดือน · คำขอของฉัน · ประวัติเช็คอิน</p></div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>สลับแท็บ "ปฏิทินการทำงานทีม"</strong><p>ดูสถานะทีม · กด ⊕ เพื่อส่งคำขอแทนพนักงาน (ลา / OT / บันทึกเวลา / เปลี่ยนกะ)</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 6: CHECK-IN -->
+    <div class="section" id="checkin">
+      <div class="section-header">
+        <div class="step-badge">6</div>
+        <div class="sec-title"><h2>📍 วิธีการเช็คอิน (Check-in)</h2><div class="en">GPS Location Check-in</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">📍 เช็คอิน (พิกัด) / Check-in with Coordinates</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>กดปุ่มเช็คอิน (พิกัด) จาก Quick Menu</strong><p>Toggle "แสดงประวัติการเช็คอิน" เพื่อดูประวัติ</p></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>ระบบแสดงพิกัด GPS ปัจจุบันบน Google Map</strong><p>กด 🎯 เพื่อให้ Google Maps ระบุตำแหน่งได้แม่นยำขึ้น</p></div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>เลือกสถานะ: "ลงเวลาเข้า" หรือ "ลงเวลาออก"</strong></div></li>
+            <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong>กด "ยืนยัน" เพื่อบันทึก</strong></div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">📸 เช็คอิน (พิกัด + รูปภาพ) / Check-in with Photo</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>กด "ถ่ายรูป" — จำเป็นต้องถ่ายรูปเพื่อยืนยัน</strong></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>ถ่ายรูปแล้วกด "ยืนยัน" (หรือ "ถ่ายใหม่" หากต้องการ)</strong></div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-box tip"><span class="ico">💡</span><div class="info-box-text"><strong>ตรวจสอบประวัติเช็คอิน</strong> Toggle "แสดงประวัติการเช็คอิน" ที่หน้าเช็คอิน เพื่อดู วันที่ · เวลา · ตำแหน่ง · รหัสบัตรรูด · สถานะ</div></div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 7: LEAVE -->
+    <div class="section" id="leave">
+      <div class="section-header">
+        <div class="step-badge">7</div>
+        <div class="sec-title"><h2>🏖️ การขอลา (Leave Request)</h2><div class="en">Leave Request Procedure</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">📝 ขั้นตอนการยื่นคำขอลา / Leave Request Steps</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>เลือกประเภทการลา</strong><span class="en">Select Leave Type</span><p>ลาพักร้อน · ลาป่วย · ลากิจ · ลาวันหยุดประจำปี · ลาคลอดรับค่าจ้าง · ลาบวช · ลาฝึกอบรม · ลาภาคปฏิบัติ ฯลฯ</p></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกรูปแบบการขอลา</strong><span class="en">Select Leave Format</span><p>ระบบแสดง สิทธิ์การลา · ใช้ไป · คงเหลือ ก่อนยื่น</p></div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>เลือกระยะวันที่ต้องการลา</strong><span class="en">Select Date Range</span></div></li>
+            <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong>ระบุเหตุผล (ถ้ามี)</strong><span class="en">Enter Reason if Required</span></div></li>
+            <li class="step-item"><div class="step-dot">5</div><div class="step-body"><strong>แนบไฟล์หลักฐาน (ถ้ามี)</strong><span class="en">Attach Documents</span><p>เช่น ใบรับรองแพทย์ · รองรับ bmp, jpg, jpeg, pdf, doc, docx, xls, xlsx, png, txt · สูงสุด 10MB</p></div></li>
+            <li class="step-item"><div class="step-dot">6</div><div class="step-body"><strong>ใส่หมายเหตุ (ถ้ามี) แล้วกด "ยืนยัน"</strong></div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">📖 รูปแบบการลา / Leave Format Types</div>
+        <div class="card-body">
+          <table class="data-table">
+            <thead><tr><th>รูปแบบ</th><th>วิธีการ</th><th>ตัวอย่าง</th></tr></thead>
+            <tbody>
+              <tr><td><strong>✅ ลาเต็มวัน</strong></td><td>ระบุวันเริ่มต้น → วันสิ้นสุด</td><td>01/01/68 ถึง 03/01/68 (ระบบตัดวันหยุดอัตโนมัติ)</td></tr>
+              <tr><td><strong>⏰ ลาช่วงเวลา</strong></td><td>ระบุวันที่ + ช่วงเวลา</td><td>ลา 09:00 – 12:00 น.</td></tr>
+              <tr><td><strong>🌅 ลาครึ่งวัน</strong></td><td>เลือก เช้า หรือ บ่าย</td><td>ครึ่งวันแรก (เช้า) / ครึ่งวันหลัง (บ่าย)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="info-box red"><span class="ico">📌</span><div class="info-box-text"><strong>กรณีลงข้อมูลผิด:</strong> สถานะ "รออนุมัติ" → สามารถลบและบันทึกใหม่ได้ · สถานะ "อนุมัติ" → ต้องแจ้ง Admin (HR) เท่านั้น</div></div>
+      <div class="info-box warn"><span class="ico">⚠️</span><div class="info-box-text">หากลาแบบเว้นวัน (เฉพาะวันจันทร์-พุธ-ศุกร์) ต้องยื่นคำขอลาแยกทีละใบ</div></div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 8: OT -->
+    <div class="section" id="ot">
+      <div class="section-header">
+        <div class="step-badge">8</div>
+        <div class="sec-title"><h2>⏱️ การขอทำงานล่วงเวลา (OT)</h2><div class="en">Overtime Request</div></div>
+      </div>
+      <div class="ot-grid">
+        <div class="ot-card"><div class="ot-code">(S)</div><div class="ot-name">ขอ OT ก่อนเริ่มงาน</div><div class="ot-desc">OT Before Work / วันหยุด</div></div>
+        <div class="ot-card"><div class="ot-code">(E)</div><div class="ot-name">ขอ OT หลังเลิกงาน</div><div class="ot-desc">OT After Work</div></div>
+        <div class="ot-card"><div class="ot-code">(B)</div><div class="ot-name">ขอ OT พักเที่ยง</div><div class="ot-desc">OT Lunchtime</div></div>
+      </div>
+      <div class="card" style="margin-top:13px;">
+        <div class="card-header">📝 ขั้นตอนการขอ OT (S และ E)</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>ระบุวันที่ขอ OT</strong> (วันเริ่มต้น – วันสิ้นสุด)</div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกประเภท OT</strong> (S) / (E) / (B)</div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>ระบุชื่องาน/หัวข้อในการทำ OT</strong></div></li>
+            <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong>ระบุช่วงเวลา OT</strong> (จาก – ถึง) ระบบคำนวณระยะเวลาให้</div></li>
+            <li class="step-item"><div class="step-dot">5</div><div class="step-body"><strong>กด "ยืนยัน"</strong></div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">🌟 OT พิเศษ / Special OT</div>
+        <div class="card-body">
+          <p style="color:var(--slate);font-size:13px;margin-bottom:10px;">ใช้เมื่อพนักงานได้รับ OT พิเศษ ทำหลายช่วงเวลา / ควบกะงาน / ได้เงินพิเศษ</p>
+          <table class="data-table">
+            <thead><tr><th>ช่อง</th><th>รายละเอียด</th></tr></thead>
+            <tbody>
+              <tr><td>โอที1 – โอที6</td><td>ระบุจำนวนชั่วโมงในแต่ละอัตรา OT</td></tr>
+              <tr><td>ค่ากะโอที</td><td>จำนวนเงิน (บาท)</td></tr>
+              <tr><td>ค่าอาหารโอที</td><td>จำนวนเงิน (บาท)</td></tr>
+              <tr><td>เงินพิเศษ</td><td>เงินพิเศษอื่นๆ (ถ้ามี)</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box red" style="margin-top:10px;"><span class="ico">📌</span><div class="info-box-text">OT พิเศษ สามารถขอได้เฉพาะ OT จ่ายเงินเท่านั้น</div></div>
+        </div>
+      </div>
+      <div class="info-box tip"><span class="ico">💡</span><div class="info-box-text"><strong>ยกเลิก OT</strong> → หน้าการแจ้งเตือน → คำขอของฉัน → เลือกคำขอ OT → กด "ยกเลิกคำขอ"</div></div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 9: RECORD TIME -->
+    <div class="section" id="recordtime">
+      <div class="section-header">
+        <div class="step-badge">9</div>
+        <div class="sec-title"><h2>⏰ บันทึกเวลาทำงาน (Record Time)</h2><div class="en">Manual Time Recording</div></div>
+      </div>
+      <div class="info-box warn"><span class="ico">⚠️</span><div class="info-box-text"><strong>ใช้เมื่อ</strong> ลืมสแกนนิ้ว หรือลืมเช็คอิน — ต้องผ่านการอนุมัติจากหัวหน้าหรือฝ่ายบุคคลเท่านั้น</div></div>
+      <div class="card">
+        <div class="card-header">📋 บันทึก 1 ช่วง (เข้า หรือ ออก) / In or Out Only</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>ระบุวันที่ขอลงเวลา</strong></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>ระบุเวลาที่ต้องการลง</strong></div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>เลือกสถานะ: "ลงเวลาเข้า" หรือ "ลงเวลาออก"</strong></div></li>
+            <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong>กด "ยืนยัน"</strong></div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">📋 บันทึกทั้ง 2 ช่วง (เข้า + ออก) / In and Out</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>ระบุวันที่เริ่มต้น + เวลาเข้างาน</strong></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>ระบุวันที่สิ้นสุด + เวลาออกงาน</strong></div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>สถานะ "ลงเวลาออก" แล้วกด "ยืนยัน"</strong></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 10: SHIFT -->
+    <div class="section" id="shift">
+      <div class="section-header">
+        <div class="step-badge">10</div>
+        <div class="sec-title"><h2>🔄 เปลี่ยน/สลับกะงาน</h2><div class="en">Shift Exchange &amp; Shift Swap</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">🔁 การเปลี่ยนกะงาน (Shift Exchange)</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>เลือกวันที่ต้องการเปลี่ยนกะ</strong><p>กรอบสีเทาแสดงกะปัจจุบัน · Day Off = เปลี่ยนเป็นวันหยุด</p></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกกะงานใหม่ที่ต้องการ</strong> เช่น BS1, BS2, BS3</div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>กด "ยืนยัน"</strong></div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">🔃 การสลับกะงาน (Shift Swap)</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>ระบุวันที่จะสลับกะกับเพื่อนร่วมทีม</strong></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกเพื่อนร่วมงานที่ต้องการสลับ</strong></div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>กด "ยืนยัน"</strong></div></li>
+          </ul>
+          <div class="info-box red"><span class="ico">📌</span><div class="info-box-text">การสลับกะงานต้องไม่ซ้ำกับเพื่อนที่จะขอสลับ และต้องได้รับการอนุมัติจากหัวหน้า</div></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 11: CLAIM -->
+    <div class="section" id="claim">
+      <div class="section-header">
+        <div class="step-badge">11</div>
+        <div class="sec-title"><h2>💳 คำขอเบิกค่าใช้จ่าย (Claim)</h2><div class="en">Expense &amp; Welfare Claim</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">🏥 หัวข้อสวัสดิการ / Welfare Claim</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>Toggle เพื่อดูประวัติคำขอ (ถ้าต้องการ)</strong></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกประเภทการเบิก → "สวัสดิการ"</strong><p>ระบบแสดงวงเงิน · ใช้ไป · คงเหลือ ของแต่ละสวัสดิการ</p></div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>เลือกประเภทสวัสดิการ</strong> เช่น สวัสดิการรักษาพยาบาล (วงเงิน 8,000 บาท/ปี)</div></li>
+            <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong>ระบุวันที่มีผล + จำนวนเงินที่ขอเบิก</strong></div></li>
+            <li class="step-item"><div class="step-dot">5</div><div class="step-body"><strong>กด "แนบไฟล์"</strong> แนบใบเสร็จ/เอกสารหลักฐาน</div></li>
+            <li class="step-item"><div class="step-dot">6</div><div class="step-body"><strong>เพิ่มรายละเอียด แล้วกด "ยืนยัน"</strong></div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">🚗 หัวข้อค่าใช้จ่าย / Expense Claim</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>เลือกประเภทค่าใช้จ่าย</strong> เช่น เดินทางต่างจังหวัด</div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>ระบุวันที่มีผล + จำนวนเงิน</strong></div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>แนบไฟล์ แล้วกด "ยืนยัน"</strong></div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">📅 วันหยุดชดเชย / Compensatory Day Off</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>ระบุวันที่ต้องการใช้วันหยุดชดเชย</strong></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกวันหยุดนักขัตฤกษ์ที่ต้องการแลก</strong> เช่น 12/08/2025</div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>กด "ยืนยัน"</strong></div></li>
+          </ul>
+          <div class="info-box warn"><span class="ico">⚠️</span><div class="info-box-text">ต้องใช้ภายใน 60 วันนับจากวันหยุดที่เกิดขึ้น · วันหยุดที่ใช้แล้วจะไม่สามารถใช้ซ้ำได้</div></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 12: APPROVAL -->
+    <div class="section" id="approval">
+      <div class="section-header">
+        <div class="step-badge">12</div>
+        <div class="sec-title"><h2>✅ การอนุมัติ (Approval)</h2><div class="en">For Managers &amp; Supervisors</div></div>
+      </div>
+      <div class="info-box tip"><span class="ico">👔</span><div class="info-box-text"><strong>สำหรับผู้จัดการ/หัวหน้างาน</strong> ฟีเจอร์นี้แสดงเฉพาะผู้มีสิทธิ์อนุมัติเท่านั้น</div></div>
+      <div class="card">
+        <div class="card-header">📋 ขั้นตอนการอนุมัติ / Approval Steps</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>กด 🔔 → เลือกแท็บ "คำขอของฉัน"</strong><p>ดูรายการทั้งหมดที่รอการอนุมัติ จัดกลุ่มตามประเภท</p></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>กรองข้อมูล (ถ้าต้องการ)</strong><p>กด 🔍 กรองตามรหัสพนักงาน · ฝ่าย · แผนก · หรือ Toggle "แสดงรายการที่รออนุมัติ"</p></div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>เลือกทีละรายการ หรือติ๊ก ☐ หลายรายการพร้อมกัน</strong><p>กด "เลือกทั้งหมด" เพื่อเลือกทุกรายการ</p></div></li>
+            <li class="step-item"><div class="step-dot">4</div><div class="step-body"><strong>กด ✅ อนุมัติ หรือ ❌ ปฏิเสธ</strong><p><span style="color:#166534;font-weight:700;">แถบขาว</span> = เปิดอ่านแล้ว · <span style="color:var(--red);font-weight:700;">แถบแดง</span> = ยังไม่เคยเปิดอ่าน</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 13: TEAM CALENDAR -->
+    <div class="section" id="teamcal">
+      <div class="section-header">
+        <div class="step-badge">13</div>
+        <div class="sec-title"><h2>👥 ปฏิทินการทำงานทีม</h2><div class="en">Team Calendar</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">📆 ส่งคำขอแทนพนักงาน / Submit Request on Behalf</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>📅 แถบล่าง → สลับแท็บ "ปฏิทินการทำงานทีม"</strong></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>กด ⊕ ที่ชื่อพนักงาน เพื่อส่งคำขอแทน</strong><p>ประเภทที่ทำแทนได้: ลา · OT · บันทึกเวลา · เปลี่ยนกะงาน · สลับกะงาน</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 14: PAYSLIP -->
+    <div class="section" id="payslip">
+      <div class="section-header">
+        <div class="step-badge">14</div>
+        <div class="sec-title"><h2>💰 สลิปเงินเดือน (PaySlip)</h2><div class="en">View &amp; Download Payslip</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">📄 วิธีดูและดาวน์โหลดสลิป</div>
+        <div class="card-body">
+          <ul class="steps">
+            <li class="step-item"><div class="step-dot">1</div><div class="step-body"><strong>เพิ่มเติม (☰) → ประวัติพนักงาน → ระบบเงินเดือน</strong></div></li>
+            <li class="step-item"><div class="step-dot">2</div><div class="step-body"><strong>เลือกสลิปที่ต้องการ</strong> → ระบุ ปี · เดือน · งวด<p>เช่น ปี 2568 · สิงหาคม · งวด 01</p></div></li>
+            <li class="step-item"><div class="step-dot">3</div><div class="step-body"><strong>กด Download เพื่อบันทึก PDF ลงเครื่อง</strong><p>ชื่อไฟล์: payslip_2568_08_01.pdf</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 15: REPORTS -->
+    <div class="section" id="reports">
+      <div class="section-header">
+        <div class="step-badge">15</div>
+        <div class="sec-title"><h2>📊 รายงาน (Reports)</h2><div class="en">Available Reports — เพิ่มเติม → รายงาน</div></div>
+      </div>
+      <div class="mod-grid">
+        <div class="mod-card"><span class="mod-icon">⏰</span><div class="mod-name">ข้อมูลดิบลงเวลา</div><div class="mod-en">Worktime Raw Data</div></div>
+        <div class="mod-card"><span class="mod-icon">📋</span><div class="mod-name">ข้อมูลหลังประมวลผล</div><div class="mod-en">After Processing</div></div>
+        <div class="mod-card"><span class="mod-icon">🏖️</span><div class="mod-name">ตรวจสิทธิ์ลา</div><div class="mod-en">Statutory Leave</div></div>
+        <div class="mod-card"><span class="mod-icon">📅</span><div class="mod-name">ประวัติการลา</div><div class="mod-en">Check Leave</div></div>
+        <div class="mod-card"><span class="mod-icon">⏱️</span><div class="mod-name">ประวัติขอ OT</div><div class="mod-en">History OT</div></div>
+        <div class="mod-card"><span class="mod-icon">💰</span><div class="mod-name">ส่งระบบเงินเดือน</div><div class="mod-en">Payroll System</div></div>
+        <div class="mod-card"><span class="mod-icon">🎌</span><div class="mod-name">วันหยุดประจำปี</div><div class="mod-en">Holiday Report</div></div>
+        <div class="mod-card"><span class="mod-icon">📍</span><div class="mod-name">ประวัติเช็คอิน</div><div class="mod-en">Check-In Report</div></div>
+      </div>
+      <div class="info-box red" style="margin-top:14px;"><span class="ico">📌</span><div class="info-box-text"><strong>หมายเหตุ:</strong> ข้อมูลดิบลงเวลา = ย้อนหลัง 45 วัน · ข้อมูลหลังประมวลผล = ย้อนหลังได้ 1 ปี · OT จะปรากฏหลัง HR ประมวลผลเท่านั้น</div></div>
+      <div class="info-box tip"><span class="ico">👔</span><div class="info-box-text"><strong>Supervisor</strong> กด 🔍 กรองตาม รหัสพนักงาน · ฝ่าย · แผนก เพื่อดูข้อมูลทีม</div></div>
+    </div>
+
+    <hr class="div">
+
+    <!-- 16: MORE -->
+    <div class="section" id="more">
+      <div class="section-header">
+        <div class="step-badge">16</div>
+        <div class="sec-title"><h2>☰ เพิ่มเติม (More)</h2><div class="en">Settings, Profile &amp; More</div></div>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>เมนู</th><th>รายละเอียด</th></tr></thead>
+        <tbody>
+          <tr><td>👤 ประวัติพนักงาน</td><td>ข้อมูลส่วนตัว · ครอบครัว · การศึกษา · ประวัติการทำงาน · เอกสาร · ทีมของฉัน · ความก้าวหน้าในสายอาชีพ</td></tr>
+          <tr><td>📊 รายงาน</td><td>รายงานทุกประเภท (ดูหัวข้อ 15)</td></tr>
+          <tr><td>⚙️ ตั้งค่า</td><td>เปลี่ยนภาษา (ไทย/English/Burmese) · บันทึกการเข้าระบบ · บันทึกภาพหน้าจอ · Login ด้วย Face/ลายนิ้วมือ · เปลี่ยนรหัสผ่าน · Version แอป</td></tr>
+          <tr><td>📷 สแกน QR Code</td><td>ตัวสแกน QR Code ภายในแอป</td></tr>
+          <tr><td>🚪 ออกจากระบบ</td><td>Logout ออกจากระบบ Tiger OpenSpace</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Footer -->
+      <div style="margin-top:42px;padding:28px;background:var(--navy);border-radius:14px;text-align:center;">
+        <div style="margin-bottom:10px; display:flex; justify-content:center;">
+          <img src="data:image/png;base64,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" alt="Tiger OpenSpace" style="height:44px; filter:drop-shadow(0 1px 3px rgba(0,0,0,0.2));">
+        </div>
+        <div style="color:rgba(255,255,255,0.48);font-size:12.5px;margin-top:4px;">MSS Mobile Application · User Manual</div>
+        <div style="display:flex;justify-content:center;gap:18px;margin-top:12px;flex-wrap:wrap;">
+          <span style="color:rgba(255,255,255,0.35);font-size:11.5px;">Version 4.0.1 (354)</span>
+          <span style="color:rgba(255,255,255,0.35);font-size:11.5px;">🌏 TH / EN / MY</span>
+          <span style="color:rgba(255,255,255,0.35);font-size:11.5px;">TIGERSOFT (1998)</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const secs = document.querySelectorAll('.section');
+const navs = document.querySelectorAll('.nav-item');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navs.forEach(n => n.classList.remove('active'));
+      const a = document.querySelector(`.nav-item[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.25 });
+secs.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
